@@ -1,0 +1,2315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KTU 2024 Syllabus Study Materials</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6a00ff;
+            --secondary: #00e5ff;
+            --accent: #ff00e5;
+            --dark: #0a0a1a;
+            --light: #f0f0ff;
+            --card-bg: rgba(20, 20, 40, 0.7);
+            --neon-glow: 0 0 15px rgba(106, 0, 255, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #molecular-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--secondary);
+            letter-spacing: 3px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 6rem 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            padding: 1rem 2.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(106, 0, 255, 0.5);
+        }
+
+        .semester-section {
+            margin: 5rem 0;
+            position: relative;
+            z-index: 10;
+            display: none;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--secondary);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .subject-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(106, 0, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .subject-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .subject-card p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: var(--light);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(106, 0, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 229, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .upload-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 3rem;
+            margin-top: 5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--primary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .upload-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .upload-box h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .upload-box p {
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+
+        .upload-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(10, 10, 26, 0.7);
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .btn-upload {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: var(--light);
+            padding: 1.2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-upload:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(106, 0, 255, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 0;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(106, 0, 255, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--light);
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(10, 10, 26, 0.7);
+            border: 1px solid var(--primary);
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-3px);
+            border-color: var(--secondary);
+        }
+
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Relaxation Box */
+        .relaxation-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem auto;
+            max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--primary);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .relaxation-box h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .relaxation-box p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .spotify-logo {
+            font-size: 2rem;
+            color: #1DB954;
+            margin-bottom: 1rem;
+        }
+
+        .relaxation-btn {
+            background: #1DB954;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .relaxation-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(29, 185, 84, 0.4);
+        }
+
+        /* Notification Box */
+        .notification-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem auto;
+            max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .notification-box h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .notification-box p {
+            margin-bottom: 1rem;
+        }
+
+        .notification-item {
+            padding: 1rem;
+            border-bottom: 1px solid  rgba(106, 0, 255, 0.3);
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-date {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Semester Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 3rem;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 0 30px rgba(106, 0, 255, 0.5);
+            border: 1px solid var(--primary);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            color: var(--secondary);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        .semester-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .semester-option {
+            background: rgba(10, 10, 26, 0.7);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .semester-option:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(106, 0, 255, 0.5);
+        }
+
+        /* Contact Modal */
+        .contact-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 3rem;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 30px rgba(106, 0, 255, 0.5);
+            border: 1px solid var(--primary);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        .contact-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .contact-info {
+            margin-bottom: 2rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .email-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+
+        .email-link:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .contact-message {
+            font-style: italic;
+            margin-top: 2rem;
+            color: var(--secondary);
+        }
+
+        /* Registration Form Styles */
+        .registration-form {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+        }
+
+        .registration-form .container {
+            background-color: rgb(255, 255, 255);
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.642);
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .registration-form .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, #0836cd, #5107ac);
+        }
+
+        .registration-form h1 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .registration-form .form-group {
+            margin-bottom: 25px;
+        }
+
+        .registration-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #dedede;
+        }
+
+        .registration-form input, 
+        .registration-form select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-sizing: border-box;
+            background-color: #040d42;
+        }
+
+        .registration-form input:focus, 
+        .registration-form select:focus {
+            outline: none;
+            border-color: #092786;
+            box-shadow: 0 0 0 3px rgba(21, 47, 130, 0.2);
+        }
+
+        .registration-form button {
+            background: linear-gradient(90deg, #ffffff, #6600e3);
+            color: rgb(255, 255, 255);
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .registration-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 49, 158, 0.619);
+        }
+
+        .registration-form .graphic { 
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .registration-form .graphic svg {
+            width: 120px;
+            height: 120px;
+        }
+
+        .registration-form .success-message {
+            display: none;
+            text-align: center;
+            color: #4BB543;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+
+        /* AI Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            width: 350px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .chatbot-toggle {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(106, 0, 255, 0.5);
+            transition: all 0.3s ease;
+            margin-left: auto;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-toggle i {
+            font-size: 1.5rem;
+        }
+
+        .chatbot-window {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: none;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            border: 1px solid var(--primary);
+        }
+
+        .chatbot-window.active {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chatbot-header i {
+            font-size: 1.2rem;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .chatbot-messages {
+            height: 300px;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .bot-message {
+            background: rgba(106, 0, 255, 0.2);
+            border: 1px solid var(--primary);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+            color: var(--light);
+        }
+
+        .user-message {
+            background: rgba(0, 229, 255, 0.2);
+            border: 1px solid var(--secondary);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+            color: var(--light);
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid rgba(106, 0, 255, 0.3);
+            background: rgba(10, 10, 26, 0.7);
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--primary);
+            border-radius: 50px;
+            background: rgba(20, 20, 40, 0.7);
+            color: white;
+            outline: none;
+        }
+
+        .chatbot-input button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-input button:hover {
+            background: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 15px;
+            background: rgba(106, 0, 255, 0.2);
+            border: 1px solid var(--primary);
+            border-radius: 18px;
+            align-self: flex-start;
+            margin-bottom: 10px;
+            width: fit-content;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+
+        /* Syllabus Groups Modal */
+        .syllabus-groups-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .syllabus-groups-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 3rem;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 30px rgba(106, 0, 255, 0.5);
+            border: 1px solid var(--primary);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        .syllabus-groups-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .syllabus-groups-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .syllabus-group-option {
+            background: rgba(10, 10, 26, 0.7);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 2rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .syllabus-group-option:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(106, 0, 255, 0.5);
+        }
+
+        /* Responsive design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .upload-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .full-width {
+                grid-column: span 1;
+            }
+
+            .semester-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+
+            .chatbot-container {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content, .contact-content, .syllabus-groups-content {
+                width: 90%;
+                padding: 2rem;
+            }
+
+            .semester-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+
+            .chatbot-container {
+                width: 280px;
+                right: 20px;
+                bottom: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .semester-grid {
+                grid-template-columns: repeat(2, 1fr));
+            }
+
+            .syllabus-groups-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chatbot-container {
+                width: 90%;
+                right: 5%;
+                bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="molecular-bg"></canvas>
+    
+    <div class="container">
+        <header>
+            <div class="logo">KTU 2024</div>
+            <nav>
+                <ul>
+                    <li><a href="#" id="homeBtn">Home</a></li> 
+                    <li><a href="#" id="allSemestersBtn">All Semesters</a></li>
+                    <li><a href="#" id="uploadBtn">Upload</a></li>
+                    <li><a href="#" id="syllabusBtn">Syllabus</a></li>
+                    <li><a href="#" id="contactBtn">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>KTU 2024 SYLLABUS</h1>
+            <div class="subtitle">Same syllabus applicable for Autonomous Colleges</div>
+            <p>Your ultimate resource for study materials, question papers, lab manuals, and more for APJ Abdul Kalam Technological University</p>
+            <button class="cta-button" id="exploreBtn">
+                Explore Materials
+            </button>
+        </section>
+
+         <!-- Revised Material Notification Box -->
+         <div class="notification-box">
+            <h2><i class="fas fa-bell"></i> Revised Material Notification</h2>
+            <p>Get notified when revised study materials are available for your semester and college.</p>
+            <button class="btn btn-primary" onclick="showRegistrationForm()">
+                <i class="fas fa-user-plus"></i> Click Here to Register
+            </button>
+        </div>
+
+        <!-- Notification Box -->
+        <div class="notification-box">
+            <h2><i class="fas fa-bell"></i> Latest Updates</h2>
+            <div class="notification-item">
+                <div class="notification-item">
+                    <div class="notification-date">April 8, 2025</div>
+                    <p>Updated with a spotify playlist.</p>
+                </div>
+                <div class="notification-date">April 8, 2025</div>
+                <p>Semester 2 notes for all subjects have been updated.</p>
+            </div>
+            <div class="notification-item">
+                <div class="notification-date">April 8, 2025</div>
+                <p>Click the registration form to get notifications about revised materials updates on your WhatsApp number and through email.</p>
+            </div>
+            <div class="notification-item">
+                <div class="notification-date">April 4, 2025</div>
+                <p>S1 (2024 scheme) results have been published. Check your results on the KTU portal.</p>
+            </div>
+        </div>
+
+         <!-- Relaxation Box -->
+         <div class="relaxation-box">
+            <h2><i class="fab fa-spotify"></i> RELAXATION FEEDS</h2>
+            <p>Feeling stressed with studies? Here's a specially curated Spotify playlist to help you relax and focus. Perfect for frustrated students who need a mental break.</p>
+            <div class="spotify-logo">
+                <i class="fab fa-spotify"></i>
+            </div>
+            <button class="relaxation-btn" onclick="window.open('https://open.spotify.com/playlist/7LAkN3NRW8cu4JVJRRU53t?si=RdcQZ-vcQ5ueMXxAO84akg&pi=VxjyDOaIT-Sdp', '_blank')">
+                <i class="fas fa-music"></i> LISTEN TO THE SONGS
+            </button>
+        </div>
+
+        <!-- Semester Sections (hidden by default) -->
+        <section id="semester1" class="semester-section">
+        <h2 class="section-title">SEMESTER 1</h2>
+        
+        <div class="subjects-grid">
+            <!-- Mathematics -->
+            <div class="subject-card">
+                <h3>Mathematics</h3>
+                <p>Comprehensive resources for Calculus and Linear Algebra</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="redirectToDrive()">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-flask"></i> Lab
+                    </button>
+                </div>
+            </div>
+
+            <!-- Physics -->
+            <div class="subject-card">
+                <h3>Physics</h3>
+                <p>Resources for Engineering Physics course</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="redirectToDrive()">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-flask"></i> Lab
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chemistry -->
+            <div class="subject-card">
+                <h3>Chemistry</h3>
+                <p>Resources for Engineering Chemistry course</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="redirectToDrive()">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-flask"></i> Lab
+                    </button>
+                </div>
+            </div>
+
+            <!-- Engineering Graphics -->
+            <div class="subject-card">
+                <h3>Engineering Graphics</h3>
+                <p>Resources for technical drawing and visualization</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="redirectToDrive()">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-flask"></i> Lab
+                    </button>
+                </div>
+            </div>
+
+            <!-- Introduction to Electrical and Electronics Engineering -->
+            <div class="subject-card">
+                <h3>Intro to EEE</h3>
+                <p>Introduction to Electrical and Electronics Engineering</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="redirectToDrive()">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-flask"></i> Lab
+                    </button>
+                </div>
+            </div>
+
+            <!-- Algorithmic Thinking with Python -->
+            <div class="subject-card">
+                <h3>Algorithmic Thinking with Python</h3>
+                <p>Programming fundamentals and problem solving</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="redirectToDrive()">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-flask"></i> Lab
+                    </button>
+                </div>
+            </div>
+
+            <!-- Health and Wellness -->
+            <div class="subject-card">
+                <h3>Health and Wellness</h3>
+                <p>Resources for personal health and wellbeing</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="redirectToDrive()">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                </div>
+            </div>
+
+            <!-- Life Skills -->
+            <div class="subject-card">
+                <h3>Life Skills</h3>
+                <p>Resources for developing essential life skills</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="redirectToDrive()">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="redirectToDrive()">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                </div>
+            </div>
+
+            <!-- NASSCOM DIGITAL 101 -->
+            <div class="subject-card">
+                <h3>NASSCOM DIGITAL 101</h3>
+                <p>Digital skills and competencies for the modern workplace</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="window.open('https://drive.google.com/drive/folders/10QxTX__2VZxFXg7PEdAKAAvuEDrMEBua', '_blank')">
+                        <i class="fas fa-file-alt"></i> Solutions for Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="semester2" class="semester-section">
+        <h2 class="section-title">SEMESTER 2</h2>
+        
+        <div class="subjects-grid">
+            <!-- Mathematics -->
+            <div class="subject-card">
+                <h3>Mathematics</h3>
+                <p>Comprehensive resources for Calculus and Linear Algebra</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-flask"></i> Lab
+                    </button>
+                </div>
+            </div>
+
+            <!-- Physics -->
+            <div class="subject-card">
+                <h3>Physics</h3>
+                <p>Resources for Engineering Physics course</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-flask"></i> Lab
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chemistry -->
+            <div class="subject-card">
+                <h3>Chemistry</h3>
+                <p>Resources for Engineering Chemistry course</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-flask"></i> Lab
+                    </button>
+                </div>
+            </div>
+
+            <!-- Discrete Mathematics -->
+            <div class="subject-card">
+                <h3>Discrete Mathematics</h3>
+                <p>Think Discrete. Solve Infinite</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-flask"></i> Lab
+                    </button>
+                </div>
+            </div>
+
+            <!-- Metallurgy and Material Science -->
+            <div class="subject-card">
+                <h3>Metallurgy and Material Science (MET205)</h3>
+                <p>Materials engineering for mechanical applications</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-flask"></i> Lab
+                    </button>
+                </div>
+            </div>
+
+            <!-- Network Theory -->
+            <div class="subject-card">
+                <h3>Network Theory</h3>
+                <p>Fundamentals of electrical networks and circuit analysis</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-flask"></i> Lab
+                    </button>
+                </div>
+            </div>
+
+            <!-- C Programming -->
+            <div class="subject-card">
+                <h3>C Programming</h3>
+                <p>Programming fundamentals and problem solving</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-flask"></i> Lab
+                    </button>
+                </div>
+            </div>
+
+            <!-- Health and Wellness -->
+            <div class="subject-card">
+                <h3>Health and Wellness</h3>
+                <p>Resources for personal health and wellbeing</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                </div>
+            </div>
+
+            <!-- Life Skills -->
+            <div class="subject-card">
+                <h3>Life Skills</h3>
+                <p>Resources for developing essential life skills</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                </div>
+            </div>
+
+            <!-- Foundation of Computing (FOC) -->
+            <div class="subject-card">
+                <h3>Foundation of Computing (FOC)</h3>
+                <p>Fundamentals of computer science and programming</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                </div>
+            </div>
+
+            <!-- EIPR (Entrepreneurship and Intellectual Property Rights) -->
+            <div class="subject-card">
+                <h3>EIPR (Entrepreneurship and Intellectual Property Rights)</h3>
+                <p>Developing entrepreneurial skills and problem-solving approaches</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-file-alt"></i> Question Papers
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-key"></i> Answer Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.open('https://drive.google.com/drive/folders/1-ymvbSZW_qrrpsWbdPmW_d6yjbqPhMuS?usp=sharing', '_blank')">
+                        <i class="fas fa-book"></i> Modules
+                    </button>
+                </div>
+            </div>
+
+            <!-- NASSCOM DIGITAL 101 -->
+            <div class="subject-card">
+                <h3>NASSCOM DIGITAL 101</h3>
+                <p>Digital skills and competencies for the modern workplace</p>
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="window.open('https://drive.google.com/drive/folders/10QxTX__2VZxFXg7PEdAKAAvuEDrMEBua', '_blank')">
+                        <i class="fas fa-file-alt"></i> Solutions for Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload section -->
+    <section id="uploadSection" class="upload-box">
+        <h3>CONTRIBUTE TO OUR COMMUNITY</h3>
+        <p>Upload your notes, question papers, or other study materials to help fellow students. Your contributions will be reviewed and added to our repository.</p>
+        
+        <form id="uploadForm" class="upload-form">
+            <div class="full-width">
+                <button type="button" class="btn-upload" onclick="redirectToUploadForm()">
+                    <i class="fas fa-cloud-upload-alt"></i> Upload Material
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-logo">KTU 2024</div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/ktunote?igsh=MWl1cmpmbHQzeTExYQ==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+        <p class="copyright">© 2024 KTU Study Materials. All rights reserved.</p>
+        <p class="copyright">Created by Vivek Dominic and Gerald Cherian</p>
+    </footer>
+</div>
+
+<!-- Semester Selection Modal -->
+<div id="semesterModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">Select Semester</h3>
+            <button class="close-modal">&times;</button>
+        </div>
+        <div class="semester-grid">
+            <div class="semester-option" onclick="selectSemester(1)">Semester 1</div>
+            <div class="semester-option" onclick="selectSemester(2)">Semester 2</div>
+            <div class="semester-option" onclick="selectSemester(3)">Semester 3</div>
+            <div class="semester-option" onclick="selectSemester(4)">Semester 4</div>
+            <div class="semester-option" onclick="selectSemester(5)">Semester 5</div>
+            <div class="semester-option" onclick="selectSemester(6)">Semester 6</div>
+            <div class="semester-option" onclick="selectSemester(7)">Semester 7</div>
+            <div class="semester-option" onclick="selectSemester(8)">Semester 8</div>
+        </div>
+    </div>
+</div>
+
+<!-- Syllabus Groups Modal -->
+<div id="syllabusGroupsModal" class="syllabus-groups-modal">
+    <div class="syllabus-groups-content">
+        <div class="modal-header">
+            <h3 class="syllabus-groups-title">Select Syllabus Group</h3>
+            <button class="close-modal" onclick="closeSyllabusGroupsModal()">&times;</button>
+        </div>
+        <div class="syllabus-groups-grid">
+            <div class="syllabus-group-option" onclick="window.open('https://drive.google.com/drive/folders/1oygqh3KMNZk-3wILLwyUUPQ-a3j89xg3?usp=sharing', '_blank')">
+                Group A
+            </div>
+            <div class="syllabus-group-option" onclick="window.open('https://drive.google.com/drive/folders/1x0Sge2eZISH8427S2fxEmbQLQY9OaxDC?usp=sharing', '_blank')">
+                Group B
+            </div>
+            <div class="syllabus-group-option" onclick="window.open('https://drive.google.com/drive/folders/1tFhNPG_UlkJMwbbQIiNQH8vK0CNsZ8U4?usp=sharing', '_blank')">
+                Group C
+            </div>
+            <div class="syllabus-group-option" onclick="window.open('https://drive.google.com/drive/folders/17JENq6BkmIk5ugUqx_DU17gRvl8eilTE?usp=sharing', '_blank')">
+                Group D
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Registration Modal -->
+<div id="registrationModal" class="modal">
+    <div class="modal-content registration-form">
+        <div class="modal-header">
+            <h3 class="modal-title">Engineering Student Registration</h3>
+            <button class="close-modal" onclick="closeRegistrationModal()">&times;</button>
+        </div>
+        <div class="graphic">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#6e8efb">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z"/>
+            </svg>
+            <h1>Engineering Student Registration</h1>
+        </div>
+        
+        <form id="studentForm">
+            <div class="form-group">
+                <label for="name" class="required">Your Name</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="required">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email address">
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number (Optional)</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+            </div>
+            
+            <div class="form-group">
+                <label for="semester" class="required">Your Semester</label>
+                <select id="semester" name="semester" required>
+                    <option value="">Select Semester</option>
+                    <option value="1">Semester 1</option>
+                    <option value="2">Semester 2</option>
+                    <option value="3">Semester 3</option>
+                    <option value="4">Semester 4</option>
+                    <option value="5">Semester 5</option>
+                    <option value="6">Semester 6</option>
+                    <option value="7">Semester 7</option>
+                    <option value="8">Semester 8</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="college" class="required">Your College</label>
+                <select id="college" name="college" required>
+                    <option value="">Select Your College</option>
+                    <option value="Adi Shankara Institute of Engineering and Technology">Adi Shankara Institute of Engineering and Technology</option>
+                    <option value="Albertian Institute of Science and Technology (AISAT)">Albertian Institute of Science and Technology (AISAT)</option>
+                    <option value="Al-Amen College of Engineering">Al-Amen College of Engineering</option>
+                    <option value="Amal Jyothi College of Engineering">Amal Jyothi College of Engineering</option>
+                    <option value="Ammini College of Engineering">Ammini College of Engineering</option>
+                    <option value="Archana College of Engineering">Archana College of Engineering</option>
+                    <option value="Axis College of Engineering & Technology">Axis College of Engineering & Technology</option>
+                    <option value="Baselios Mathews II College of Engineering">Baselios Mathews II College of Engineering</option>
+                    <option value="Bishop Jerome Institute">Bishop Jerome Institute</option>
+                    <option value="Carmel Engineering College">Carmel Engineering College</option>
+                    <option value="Christ Knowledge City">Christ Knowledge City</option>
+                    <option value="College of Engineering, Adoor">College of Engineering, Adoor</option>
+                    <option value="College of Engineering, Attingal">College of Engineering, Attingal</option>
+                    <option value="College of Engineering, Chengannur">College of Engineering, Chengannur</option>
+                    <option value="College of Engineering, Kalloopara">College of Engineering, Kalloopara</option>
+                    <option value="College of Engineering, Kidangoor">College of Engineering, Kidangoor</option>
+                    <option value="College of Engineering, Kottarakkara">College of Engineering, Kottarakkara</option>
+                    <option value="College of Engineering, Munnar">College of Engineering, Munnar</option>
+                    <option value="College of Engineering, Pathanapuram">College of Engineering, Pathanapuram</option>
+                    <option value="College of Engineering, Perumon">College of Engineering, Perumon</option>
+                    <option value="College of Engineering, Poonjar">College of Engineering, Poonjar</option>
+                    <option value="College of Engineering, Thalassery">College of Engineering, Thalassery</option>
+                    <option value="College of Engineering, Thiruvananthapuram">College of Engineering, Thiruvananthapuram</option>
+                    <option value="College of Engineering, Trikaripur">College of Engineering, Trikaripur</option>
+                    <option value="College of Engineering and Management Punnapra">College of Engineering and Management Punnapra</option>
+                    <option value="Deva Matha College of Engineering">Deva Matha College of Engineering</option>
+                    <option value="Federal Institute of Science and Technology (FISAT)">Federal Institute of Science and Technology (FISAT)</option>
+                    <option value="Government College of Engineering, Kannur">Government College of Engineering, Kannur</option>
+                    <option value="Government College of Engineering, Kozhikode">Government College of Engineering, Kozhikode</option>
+                    <option value="Government College of Engineering, Thrissur">Government College of Engineering, Thrissur</option>
+                    <option value="Government College of Engineering, Wayanad">Government College of Engineering, Wayanad</option>
+                    <option value="Government Engineering College, Barton Hill">Government Engineering College, Barton Hill</option>
+                    <option value="Government Engineering College, Idukki">Government Engineering College, Idukki</option>
+                    <option value="Government Engineering College, Sreekrishnapuram">Government Engineering College, Sreekrishnapuram</option>
+                    <option value="Gurudeva Institute of Science and Technology">Gurudeva Institute of Science and Technology</option>
+                    <option value="Heera College of Engineering and Technology (HCET)">Heera College of Engineering and Technology (HCET)</option>
+                    <option value="IES College of Engineering">IES College of Engineering</option>
+                    <option value="Ilahia College of Engineering and Technology">Ilahia College of Engineering and Technology</option>
+                    <option value="Indira Gandhi Institute of Engineering & Technology for Women">Indira Gandhi Institute of Engineering & Technology for Women</option>
+                    <option value="Jai Bharath Arts & Science College">Jai Bharath Arts & Science College</option>
+                    <option value="Jawaharlal College of Engineering and Technology">Jawaharlal College of Engineering and Technology</option>
+                    <option value="Jyothi Engineering College">Jyothi Engineering College</option>
+                    <option value="KMEA Engineering College">KMEA Engineering College</option>
+                    <option value="KMCT College of Engineering">KMCT College of Engineering</option>
+                    <option value="KMCT College of Engineering for Women">KMCT College of Engineering for Women</option>
+                    <option value="K R Gouri Amma College of Engineering for Women">K R Gouri Amma College of Engineering for Women</option>
+                    <option value="Kristu Jyoti College of Management and Technology">Kristu Jyoti College of Management and Technology</option>
+                    <option value="KVM College of Engineering & IT">KVM College of Engineering & IT</option>
+                    <option value="LBS Institute of Technology for Women">LBS Institute of Technology for Women</option>
+                    <option value="Lourdes Matha College of Science and Technology">Lourdes Matha College of Science and Technology</option>
+                    <option value="Mangalam College of Engineering">Mangalam College of Engineering</option>
+                    <option value="Mar Athanasios College for Advanced Studies Tiruvalla (MACFAST)">Mar Athanasios College for Advanced Studies Tiruvalla (MACFAST)</option>
+                    <option value="Mar Baselios Christian College of Engineering & Technology">Mar Baselios Christian College of Engineering & Technology</option>
+                    <option value="Mar Baselios College of Engineering and Technology">Mar Baselios College of Engineering and Technology</option>
+                    <option value="Mar Baselios Institute of Technology and Science">Mar Baselios Institute of Technology and Science</option>
+                    <option value="Mary Matha College of Engineering and Technology">Mary Matha College of Engineering and Technology</option>
+                    <option value="Matha College of Technology">Matha College of Technology</option>
+                    <option value="MEA Engineering College">MEA Engineering College</option>
+                    <option value="MES College of Engineering, Kuttipuram">MES College of Engineering, Kuttipuram</option>
+                    <option value="METS School of Engineering, Mala">METS School of Engineering, Mala</option>
+                    <option value="Model Engineering College">Model Engineering College</option>
+                    <option value="Mohandas College of Engineering and Technology">Mohandas College of Engineering and Technology</option>
+                    <option value="Mount Zion College of Engineering">Mount Zion College of Engineering</option>
+                    <option value="Mount Zion College of Engineering for Women">Mount Zion College of Engineering for Women</option>
+                    <option value="Muslim Association College of Engineering">Muslim Association College of Engineering</option>
+                    <option value="Nirmala College of Engineering">Nirmala College of Engineering</option>
+                    <option value="NSS College of Engineering">NSS College of Engineering</option>
+                    <option value="Palakkad Institute of Science and Technology">Palakkad Institute of Science and Technology</option>
+                    <option value="Pankajakasthuri College of Engineering and Technology">Pankajakasthuri College of Engineering and Technology</option>
+                    <option value="Prime College of Engineering for Women">Prime College of Engineering for Women</option>
+                    <option value="Pushpagiri College of Pharmacy">Pushpagiri College of Pharmacy</option>
+                    <option value="Rajadhani Institute of Engineering and Technology">Rajadhani Institute of Engineering and Technology</option>
+                    <option value="Rajagiri School of Engineering & Technology">Rajagiri School of Engineering & Technology</option>
+                    <option value="Rajiv Gandhi Institute of Technology, Kottayam">Rajiv Gandhi Institute of Technology, Kottayam</option>
+                    <option value="Royal College of Engineering & Technology">Royal College of Engineering & Technology</option>
+                    <option value="Sahrdaya College of Engineering & Technology">Sahrdaya College of Engineering & Technology</option>
+                    <option value="Saintgits College of Engineering">Saintgits College of Engineering</option>
+                    <option value="Sarabhai Institute of Science and Technology">Sarabhai Institute of Science and Technology</option>
+                    <option value="SCMS School of Engineering & Technology">SCMS School of Engineering & Technology</option>
+                    <option value="Shahul Hameed Memorial Engineering College">Shahul Hameed Memorial Engineering College</option>
+                    <option value="Sneha Charya Institute of Management & Technology">Sneha Charya Institute of Management & Technology</option>
+                    <option value="Sree Buddha College of Engineering">Sree Buddha College of Engineering</option>
+                    <option value="Sree Buddha College of Engineering for Women">Sree Buddha College of Engineering for Women</option>
+                    <option value="Sree Chitra Thirunal College of Engineering">Sree Chitra Thirunal College of Engineering</option>
+                    <option value="Sree Narayana Guru College of Engineering & Technology">Sree Narayana Guru College of Engineering & Technology</option>
+                    <option value="Sree Narayana Guru Institute of Technology">Sree Narayana Guru Institute of Technology</option>
+                    <option value="Sree Narayana Institute of Technology">Sree Narayana Institute of Technology</option>
+                    <option value="Sree Vellappally Natesan College of Engineering">Sree Vellappally Natesan College of Engineering</option>
+                    <option value="Sreepathy Institute of Management and Technology">Sreepathy Institute of Management and Technology</option>
+                    <option value="St. Joseph's College of Engineering & Technology, Palai">St. Joseph's College of Engineering & Technology, Palai</option>
+                    <option value="TKM College of Engineering">TKM College of Engineering</option>
+                    <option value="TKM Institute of Technology">TKM Institute of Technology</option>
+                    <option value="Thejus Engineering College">Thejus Engineering College</option>
+                    <option value="Travancore Engineering College">Travancore Engineering College</option>
+                    <option value="University College of Engineering, Kariavattom">University College of Engineering, Kariavattom</option>
+                    <option value="Valia Koonambaikulathamma College of Engineering and Technology">Valia Koonambaikulathamma College of Engineering and Technology</option>
+                    <option value="Vedavyasa Institute of Technology">Vedavyasa Institute of Technology</option>
+                    <option value="Vidya Academy of Science & Technology">Vidya Academy of Science & Technology</option>
+                    <option value="Vimal Jyothi Engineering College">Vimal Jyothi Engineering College</option>
+                    <option value="Viswayjothi College of Engineering & Technology">Viswayjothi College of Engineering & Technology</option>
+                    <option value="Younus College of Engineering and Technology">Younus College of Engineering and Technology</option>
+                    <option value="Younus College of Engineering for Women">Younus College of Engineering for Women</option>
+                </select>
+            </div>
+            
+            <button type="submit">Submit</button>
+            <div id="successMessage" class="success-message">
+                Thank you! Your data has been submitted successfully. You will receive our notifications through email and WhatsApp when we upload new materials, question papers, etc.
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Contact Modal -->
+<div id="contactModal" class="contact-modal">
+    <div class="contact-content">
+        <div class="modal-header">
+            <h3 class="contact-title">Contact Us</h3>
+            <button class="close-modal" onclick="closeContactModal()">&times;</button>
+        </div>
+        <div class="contact-info">
+            <p>If you have any queries or suggestions, please feel free to contact us:</p>
+            <a href="mailto:ktunotes4@gmail.com" class="email-link">
+                <i class="fas fa-envelope"></i> ktunotes4@gmail.com
+            </a>
+            <br>
+            <a href="mailto:geraldvivek4@gmail.com" class="email-link">
+                <i class="fas fa-envelope"></i> geraldvivek4@gmail.com
+            </a>
+            <p class="contact-message">For any queries, please contact us through the above email addresses.</p>
+        </div>
+    </div>
+</div>
+
+<!-- AI Chatbot -->
+<div class="chatbot-container">
+    <div class="chatbot-toggle" id="chatbotToggle">
+        <i class="fas fa-robot"></i>
+    </div>
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <h3><i class="fas fa-robot"></i> KTU Study Assistant</h3>
+            <button class="chatbot-close" id="chatbotClose">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot-message">
+                Hello! I'm your KTU study assistant. How can I help you today?
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Ask me anything about KTU...">
+            <button id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Molecular Background Animation
+    const canvas = document.getElementById('molecular-bg');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Particle class
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 3 + 1;
+            this.speedX = Math.random() * 3 - 1.5;
+            this.speedY = Math.random() * 3 - 1.5;
+            this.color = `hsl(${Math.random() * 60 + 240}, 100%, 70%)`;
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            
+            // Boundary check
+            if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        }
+
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    // Create particles
+    const particles = [];
+    for (let i = 0; i < 50; i++) {
+        particles.push(new Particle());
+    }
+
+    // Connect particles that are close
+    function connect() {
+        for (let a = 0; a < particles.length; a++) {
+            for (let b = a; b < particles.length; b++) {
+                const dx = particles[a].x - particles[b].x;
+                const dy = particles[a].y - particles[b].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 100) {
+                    ctx.strokeStyle = `rgba(106, 0, 255, ${1 - distance/100})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[a].x, particles[a].y);
+                    ctx.lineTo(particles[b].x, particles[b].y);
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    // Animation loop
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+        }
+        
+        connect();
+        requestAnimationFrame(animate);
+    }
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+
+    // Start animation
+    animate();
+
+    // Redirect to Google Drive function
+    function redirectToDrive() {
+        window.open('https://drive.google.com/drive/folders/15eRv3mpq7qvI8k9OjOTF_EI5lYtp7Qqo?usp=sharing', '_blank');
+    }
+
+    // Redirect to upload form
+    function redirectToUploadForm() {
+        if (confirm('Do you want to upload materials? Click OK to proceed to the upload form.')) {
+            window.open('https://forms.gle/7jJ9fCmHs1cZEeC47', '_blank');
+        }
+    }
+
+    // Semester Modal functionality
+    const semesterModal = document.getElementById('semesterModal');
+    const allSemestersBtn = document.getElementById('allSemestersBtn');
+    const closeModal = document.querySelector('.close-modal');
+    const homeBtn = document.getElementById('homeBtn');
+    const exploreBtn = document.getElementById('exploreBtn');
+    const syllabusBtn = document.getElementById('syllabusBtn');
+    const syllabusGroupsModal = document.getElementById('syllabusGroupsModal');
+
+    // Hide all semester sections initially
+    document.querySelectorAll('.semester-section').forEach(section => {
+        section.style.display = 'none';
+    });
+
+    // Show home page
+    function showHomePage() {
+        document.querySelectorAll('.semester-section').forEach(section => {
+            section.style.display = 'none';
+        });
+        document.querySelector('.hero').style.display = 'block';
+        document.querySelector('.notification-box').style.display = 'block';
+        document.getElementById('uploadSection').style.display = 'block';
+        document.querySelector('footer').style.display = 'block';
+    }
+
+    // Show semester section
+    function showSemesterSection(semesterNumber) {
+        document.querySelectorAll('.semester-section').forEach(section => {
+            section.style.display = 'none';
+        });
+        document.querySelector('.hero').style.display = 'none';
+        document.querySelector('.notification-box').style.display = 'none';
+        document.getElementById('uploadSection').style.display = 'none';
+        document.querySelector('footer').style.display = 'none';
+        
+        const semesterSection = document.getElementById(`semester${semesterNumber}`);
+        if (semesterSection) {
+            semesterSection.style.display = 'block';
+            semesterSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    // Event listeners
+    allSemestersBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        semesterModal.style.display = 'flex';
+    });
+
+    syllabusBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        syllabusGroupsModal.style.display = 'flex';
+    });
+
+    closeModal.addEventListener('click', function() {
+        semesterModal.style.display = 'none';
+    });
+
+    homeBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        showHomePage();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    exploreBtn.addEventListener('click', function() {
+        semesterModal.style.display = 'flex';
+    });
+
+    window.addEventListener('click', function(e) {
+        if (e.target === semesterModal) {
+            semesterModal.style.display = 'none';
+        }
+        if (e.target === syllabusGroupsModal) {
+            syllabusGroupsModal.style.display = 'none';
+        }
+    });
+
+    function closeSyllabusGroupsModal() {
+        syllabusGroupsModal.style.display = 'none';
+    }
+
+    function selectSemester(semester) {
+        semesterModal.style.display = 'none';
+        showSemesterSection(semester);
+    }
+
+    // Contact Modal functionality
+    const contactModal = document.getElementById('contactModal');
+    const contactBtn = document.getElementById('contactBtn');
+
+    contactBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        contactModal.style.display = 'flex';
+    });
+
+    function closeContactModal() {
+        contactModal.style.display = 'none';
+    }
+
+    window.addEventListener('click', function(e) {
+        if (e.target === contactModal) {
+            contactModal.style.display = 'none';
+        }
+    });
+
+    // Upload button functionality
+    const uploadBtn = document.getElementById('uploadBtn');
+    const uploadSection = document.getElementById('uploadSection');
+
+    uploadBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        showHomePage();
+        uploadSection.scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+
+    // Registration Form functionality
+    function showRegistrationForm() {
+        const registrationModal = document.getElementById('registrationModal');
+        registrationModal.style.display = 'flex';
+    }
+
+    function closeRegistrationModal() {
+        const registrationModal = document.getElementById('registrationModal');
+        registrationModal.style.display = 'none';
+    }
+
+    document.getElementById('studentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const semester = document.getElementById('semester').value;
+        const college = document.getElementById('college').value;
+        
+        // Your Google Sheets script URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwwtPAFnpXQk56IFau765TjorW1_nhWtJziX1EpJY6SVZuE6OsKaHaleNVZVIqyvNon/exec';
+        
+        fetch(scriptURL, {
+            method: 'POST',
+            body: new URLSearchParams({
+                'Name': name,
+                'Email': email,
+                'Phone': phone,
+                'Semester': semester,
+                'College': college
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+                // Reset form
+                document.getElementById('studentForm').reset();
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                    closeRegistrationModal();
+                }, 5000);
+            } else {
+                throw new Error('Network response was not ok');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was a problem submitting the form. Please try again.');
+        });
+    });
+
+    // AI Chatbot functionality
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const chatbotClose = document.getElementById('chatbotClose');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const chatbotSend = document.getElementById('chatbotSend');
+
+    let isChatbotOpen = false;
+
+    chatbotToggle.addEventListener('click', function() {
+        isChatbotOpen = !isChatbotOpen;
+        if (isChatbotOpen) {
+            chatbotWindow.classList.add('active');
+        } else {
+            chatbotWindow.classList.remove('active');
+        }
+    });
+
+    chatbotClose.addEventListener('click', function() {
+        isChatbotOpen = false;
+        chatbotWindow.classList.remove('active');
+    });
+
+    function addMessage(message, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message');
+        messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+        messageDiv.textContent = message;
+        chatbotMessages.appendChild(messageDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    function showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.classList.add('typing-indicator');
+        typingDiv.innerHTML = `
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+        `;
+        chatbotMessages.appendChild(typingDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        return typingDiv;
+    }
+
+    function removeTypingIndicator(typingIndicator) {
+        typingIndicator.remove();
+    }
+
+    // Enhanced subject information for the chatbot
+    const subjectInfo = {
+        'mathematics': {
+            description: "Mathematics covers fundamental concepts including calculus, linear algebra, and differential equations. Essential for engineering problem-solving and analytical thinking.",
+            topics: ["Calculus", "Linear Algebra", "Differential Equations", "Vector Calculus", "Probability and Statistics"],
+            resources: "Includes textbooks, solved problems, previous year question papers, and video lectures."
+        },
+        'physics': {
+            description: "Engineering Physics explores the principles of mechanics, waves, optics, and modern physics with applications in engineering.",
+            topics: ["Mechanics", "Waves and Oscillations", "Optics", "Electromagnetism", "Modern Physics"],
+            resources: "Lab manuals, experiment guides, theory notes, and practical demonstrations available."
+        },
+        'chemistry': {
+            description: "Engineering Chemistry focuses on chemical principles relevant to engineering applications like materials, corrosion, and electrochemistry.",
+            topics: ["Water Chemistry", "Polymer Chemistry", "Electrochemistry", "Corrosion", "Spectroscopy"],
+            resources: "Includes practical lab sheets, theory modules, and industrial application case studies."
+        },
+        'engineering graphics': {
+            description: "Teaches technical drawing skills including orthographic projections, isometric views, and CAD basics for engineering design.",
+            topics: ["Orthographic Projections", "Isometric Views", "Sectional Views", "CAD Basics", "Development of Surfaces"],
+            resources: "Drawing sheets, CAD tutorials, and practice problems with solutions."
+        },
+        'intro to eee': {
+            description: "Introduction to Electrical and Electronics Engineering covers basic circuit theory, electronic components, and power systems fundamentals.",
+            topics: ["Basic Circuit Theory", "Electronic Components", "Power Systems", "Digital Electronics", "Electrical Machines"],
+            resources: "Circuit diagrams, simulation files, and component datasheets available."
+        },
+        'algorithmic thinking with python': {
+            description: "Introduces computational thinking and problem-solving using Python programming language with engineering applications.",
+            topics: ["Python Basics", "Data Structures", "Algorithms", "Problem Solving", "Computational Thinking"],
+            resources: "Coding exercises, sample programs, and project ideas with solutions."
+        },
+        'health and wellness': {
+            description: "Focuses on physical and mental wellbeing for students, covering nutrition, stress management, and healthy lifestyle practices.",
+            topics: ["Nutrition", "Stress Management", "Physical Fitness", "Mental Health", "Lifestyle Diseases"],
+            resources: "Wellness guides, exercise routines, and mental health resources."
+        },
+        'life skills': {
+            description: "Develops essential soft skills including communication, teamwork, and time management for professional success.",
+            topics: ["Communication Skills", "Teamwork", "Time Management", "Leadership", "Critical Thinking"],
+            resources: "Case studies, activity sheets, and self-assessment tools."
+        },
+        'discrete mathematics': {
+            description: "Covers mathematical structures that are fundamentally discrete rather than continuous, essential for computer science.",
+            topics: ["Logic", "Set Theory", "Graph Theory", "Combinatorics", "Algebraic Structures"],
+            resources: "Problem sets, proof techniques, and applications in computer science."
+        },
+        'metallurgy and material science': {
+            description: "Studies the properties of metals and materials, their processing, and applications in engineering.",
+            topics: ["Crystal Structures", "Phase Diagrams", "Heat Treatment", "Mechanical Properties", "Material Testing"],
+            resources: "Material property charts, lab procedures, and case studies."
+        },
+        'network theory': {
+            description: "Fundamentals of electrical networks including circuit analysis techniques and network theorems.",
+            topics: ["Circuit Elements", "Network Theorems", "AC Circuits", "Resonance", "Two-Port Networks"],
+            resources: "Circuit analysis examples, simulation files, and problem sets."
+        },
+        'c programming': {
+            description: "Teaches structured programming using C language, covering syntax, control structures, and basic algorithms.",
+            topics: ["C Syntax", "Control Structures", "Functions", "Arrays", "Pointers"],
+            resources: "Code examples, debugging exercises, and project ideas."
+        },
+        'foundation of computing': {
+            description: "Introduces fundamental computing concepts including computer architecture, operating systems, and networking basics.",
+            topics: ["Computer Architecture", "OS Basics", "Networking", "Database Fundamentals", "Programming Basics"],
+            resources: "Study guides, concept maps, and foundational reading materials."
+        },
+        'eipr': {
+            description: "Entrepreneurship and Industrial Problem Resolution develops skills for identifying business opportunities and solving industrial problems.",
+            topics: ["Entrepreneurship Basics", "Problem Identification", "Case Studies", "Solution Approaches", "Business Planning"],
+            resources: "Case studies, business plan templates, and entrepreneurial tools."
+        }
+    };
+
+    function getBotResponse(userMessage) {
+        const lowerMessage = userMessage.toLowerCase();
+        
+        // Greetings
+        if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+            return "Hello there! How can I assist you with your KTU studies today?";
+        }
+        
+        // Help command
+        if (lowerMessage.includes('help') || lowerMessage.includes('what can you do')) {
+            return "I can help with:\n1. Subject information\n2. Study resources\n3. Syllabus queries\n4. Exam preparation tips\n5. General KTU information\n\nTry asking about a specific subject or topic!";
+        }
+        
+        // Material queries
+        if (lowerMessage.includes('material') || lowerMessage.includes('notes') || lowerMessage.includes('study')) {
+            return "You can find study materials for all subjects in their respective semester sections. Just select your semester from the menu!";
+        }
+        
+        // Question papers
+        if (lowerMessage.includes('question paper') || lowerMessage.includes('qp') || lowerMessage.includes('previous year')) {
+            return "Previous year question papers are available for each subject. Click on the 'Question Papers' button in your subject's card to access them.";
+        }
+        
+        // Upload queries
+        if (lowerMessage.includes('upload') || lowerMessage.includes('contribute')) {
+            return "You can contribute by uploading materials through our upload form. Just click the 'Upload' button in the navigation menu!";
+        }
+        
+        // Thank you responses
+        if (lowerMessage.includes('thank')) {
+            return "You're welcome! Let me know if you need any more help with your KTU studies.";
+        }
+        
+        // Contact information
+        if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('help')) {
+            return "You can contact us via email at ktunotes4@gmail.com or vivekgerald3@gmail.com for any queries.";
+        }
+        
+        // Syllabus queries
+        if (lowerMessage.includes('syllabus') || lowerMessage.includes('curriculum') || lowerMessage.includes('course content')) {
+            return "The KTU 2024 syllabus covers all subjects across 8 semesters. You can explore subjects semester-wise using the 'All Semesters' menu or check syllabus groups using the 'Syllabus' button.";
+        }
+        
+        // Check for subject queries
+        for (const [subject, info] of Object.entries(subjectInfo)) {
+            if (lowerMessage.includes(subject)) {
+                let response = `About ${subject.toUpperCase()}:\n${info.description}\n\nKey Topics:\n`;
+                info.topics.forEach(topic => response += `- ${topic}\n`);
+                response += `\nResources Available:\n${info.resources}`;
+                return response;
+            }
+        }
+        
+        // Default response
+        return "I'm here to help with KTU-related queries. You can ask me about:\n- Specific subjects\n- Study materials\n- Question papers\n- Syllabus information\n- Exam preparation\nTry being more specific with your question!";
+    }
+
+    function handleUserInput() {
+        const userMessage = chatbotInput.value.trim();
+        if (userMessage === '') return;
+        
+        addMessage(userMessage, true);
+        chatbotInput.value = '';
+        
+        const typingIndicator = showTypingIndicator();
+        
+        setTimeout(() => {
+            removeTypingIndicator(typingIndicator);
+            const botResponse = getBotResponse(userMessage);
+            addMessage(botResponse);
+        }, 1000 + Math.random() * 2000); // Simulate typing delay
+    }
+
+    chatbotSend.addEventListener('click', handleUserInput);
+    
+    chatbotInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            handleUserInput();
+        }
+    });
+</script>
+</body>
+</html>
