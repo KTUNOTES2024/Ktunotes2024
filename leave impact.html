@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Impact Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 25px;
+            margin-bottom: 30px;
+            animation: slideUp 0.5s ease;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .result-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .highlight {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .danger {
+            color: var(--warning);
+        }
+        
+        .success {
+            color: var(--success);
+        }
+        
+        .warning {
+            color: #ff9e00;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            animation: pulse 2s infinite;
+        }
+        
+        .subject-list {
+            list-style-type: none;
+            margin-top: 15px;
+        }
+        
+        .subject-list li {
+            padding: 10px;
+            background: #f8f9fa;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        .celebration {
+            text-align: center;
+            padding: 20px;
+            animation: celebrate 1s ease;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            flex: 1;
+            margin: 0 10px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .leave-impact {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .impact-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .impact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .impact-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .table th, .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                flex-direction: column;
+            }
+            
+            .stat-box {
+                margin: 10px 0;
+            }
+            
+            .leave-impact {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.2); }
+            70% { box-shadow: 0 0 0 10px rgba(67, 97, 238, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0); }
+        }
+        
+        @keyframes celebrate {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: var(--success);
+            opacity: 0;
+            animation: confettiFall 5s ease-in-out infinite;
+        }
+        
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-calendar-minus"></i> Leave Impact Calculator</h1>
+            <p class="subtitle">See how taking leaves affects your attendance percentage</p>
+        </header>
+        
+        <div class="grid">
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-user-graduate"></i> Your Current Attendance</h2>
+                <div class="form-group">
+                    <label for="classes-attended">Classes Attended</label>
+                    <input type="number" id="classes-attended" min="0" placeholder="Enter number of classes attended">
+                </div>
+                
+                <div class="form-group">
+                    <label for="total-classes">Total Classes Held</label>
+                    <input type="number" id="total-classes" min="1" placeholder="Enter total number of classes">
+                </div>
+                
+                <div class="form-group">
+                    <label for="classes-per-day">Average Classes Per Day</label>
+                    <input type="number" id="classes-per-day" min="1" value="6" placeholder="e.g., 6">
+                </div>
+                
+                <button onclick="calculateAttendance()"><i class="fas fa-calculator"></i> Calculate</button>
+                
+                <div class="result-box">
+                    <h3>Current Attendance: <span id="current-percentage">-</span></h3>
+                    <div class="progress-bar">
+                        <div class="progress" id="progress-bar" style="width: 0%; background: var(--warning);"></div>
+                    </div>
+                    <p id="attendance-status">Enter your data to see your status</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-bed"></i> Leave Impact Analysis</h2>
+                <div class="form-group">
+                    <label for="leave-days">How many days of leave do you want to take?</label>
+                    <input type="number" id="leave-days" min="0" value="1" placeholder="Number of leave days">
+                </div>
+                
+                <button onclick="calculateLeaveImpact()"><i class="fas fa-calculator"></i> Calculate Impact</button>
+                
+                <div class="result-box">
+                    <h3>After Leave: <span id="after-leave">-</span></h3>
+                    <p id="impact-message">See how your leave affects your attendance</p>
+                    
+                    <div class="leave-impact">
+                        <div class="impact-card">
+                            <i class="fas fa-arrow-down fa-2x danger"></i>
+                            <div class="impact-value danger" id="percentage-drop">-</div>
+                            <p>Percentage Drop</p>
+                        </div>
+                        
+                        <div class="impact-card">
+                            <i class="fas fa-calendar-day fa-2x warning"></i>
+                            <div class="impact-value warning" id="classes-missed">-</div>
+                            <p>Classes Missed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-tachometer-alt"></i> Leave Capacity</h2>
+                <div class="result-box">
+                    <h3>You can take up to <span class="highlight" id="max-leaves">-</span> days off</h3>
+                    <p>while maintaining 75% attendance</p>
+                    
+                    <div class="progress-bar">
+                        <div class="progress" id="leave-progress" style="width: 0%; background: var(--success);"></div>
+                    </div>
+                    
+                    <p id="leave-capacity-details">Calculate your attendance to see your leave capacity</p>
+                </div>
+                
+                <div class="info-box">
+                    <p><i class="fas fa-info-circle"></i> This calculation assumes you'll have the same number of classes per day during your leave period.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-table"></i> Leave Impact Table</h2>
+                <div class="result-box">
+                    <p>See how different leave durations affect your attendance:</p>
+                    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Days Off</th>
+                                <th>Classes Missed</th>
+                                <th>New Percentage</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leave-table">
+                            <tr>
+                                <td colspan="4" style="text-align: center;">Calculate your attendance to see data</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© KTU NOTES 2024 Leave Impact Calculator | Always verify with your official ET Lab records</p>
+        </footer>
+    </div>
+
+    <script>
+        // Global variables
+        let currentPercentage = 0;
+        let classesAttended = 0;
+        let totalClasses = 0;
+        let classesPerDay = 6;
+
+        // Calculate current attendance
+        function calculateAttendance() {
+            classesAttended = parseInt(document.getElementById('classes-attended').value);
+            totalClasses = parseInt(document.getElementById('total-classes').value);
+            classesPerDay = parseInt(document.getElementById('classes-per-day').value);
+            
+            if (isNaN(classesAttended) || isNaN(totalClasses) || isNaN(classesPerDay) || totalClasses === 0) {
+                alert('Please enter valid numbers for all fields');
+                return;
+            }
+            
+            if (classesAttended > totalClasses) {
+                alert('Classes attended cannot be more than total classes');
+                return;
+            }
+            
+            currentPercentage = (classesAttended / totalClasses) * 100;
+            document.getElementById('current-percentage').textContent = currentPercentage.toFixed(2) + '%';
+            
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = `${Math.min(currentPercentage, 100)}%`;
+            
+            const statusElement = document.getElementById('attendance-status');
+            if (currentPercentage >= 75) {
+                progressBar.style.background = 'var(--success)';
+                statusElement.innerHTML = '<span class="success">Good! Your attendance is above 75%</span>';
+            } else {
+                progressBar.style.background = 'var(--warning)';
+                statusElement.innerHTML = '<span class="danger">Warning! Your attendance is below 75%</span>';
+            }
+            
+            // Calculate leave capacity
+            calculateLeaveCapacity();
+            
+            // Generate impact table
+            generateImpactTable();
+        }
+
+        // Calculate impact of taking leave
+        function calculateLeaveImpact() {
+            if (totalClasses === 0) {
+                alert('Please calculate your current attendance first');
+                return;
+            }
+            
+            const leaveDays = parseInt(document.getElementById('leave-days').value);
+            
+            if (isNaN(leaveDays) || leaveDays < 0) {
+                alert('Please enter a valid number of leave days');
+                return;
+            }
+            
+            const classesMissed = leaveDays * classesPerDay;
+            const newTotal = totalClasses + classesMissed;
+            const newPercentage = (classesAttended / newTotal) * 100;
+            
+            const percentageDrop = currentPercentage - newPercentage;
+            
+            document.getElementById('after-leave').textContent = newPercentage.toFixed(2) + '%';
+            document.getElementById('percentage-drop').textContent = percentageDrop.toFixed(2) + '%';
+            document.getElementById('classes-missed').textContent = classesMissed;
+            
+            const messageElement = document.getElementById('impact-message');
+            if (newPercentage >= 75) {
+                messageElement.innerHTML = `<span class="success">Even after ${leaveDays} day(s) of leave, you'll maintain 75%+ attendance</span>`;
+            } else {
+                messageElement.innerHTML = `<span class="danger">After ${leaveDays} day(s) of leave, your attendance will drop below 75%</span>`;
+            }
+        }
+
+        // Calculate how many leaves can be taken while maintaining 75%
+        function calculateLeaveCapacity() {
+            if (totalClasses === 0) return;
+            
+            // Calculate maximum leaves while maintaining 75%
+            let maxLeaves = 0;
+            let newPercentage = currentPercentage;
+            
+            while (newPercentage >= 75) {
+                maxLeaves++;
+                const newTotal = totalClasses + (maxLeaves * classesPerDay);
+                newPercentage = (classesAttended / newTotal) * 100;
+            }
+            
+            // The last increment made it drop below 75%, so subtract one
+            maxLeaves = Math.max(0, maxLeaves - 1);
+            
+            document.getElementById('max-leaves').textContent = maxLeaves;
+            
+            const capacityElement = document.getElementById('leave-capacity-details');
+            if (maxLeaves === 0) {
+                capacityElement.innerHTML = '<span class="danger">You cannot take any leaves without dropping below 75% attendance</span>';
+            } else {
+                capacityElement.innerHTML = `<span class="success">You can take up to ${maxLeaves} days off while maintaining 75% attendance</span>`;
+            }
+            
+            // Update progress bar for leave capacity
+            const progressBar = document.getElementById('leave-progress');
+            const capacityPercentage = (maxLeaves / 20) * 100; // Assuming 20 is a reasonable max
+            progressBar.style.width = `${Math.min(capacityPercentage, 100)}%`;
+        }
+
+        // Generate impact table for different leave durations
+        function generateImpactTable() {
+            if (totalClasses === 0) return;
+            
+            const table = document.getElementById('leave-table');
+            table.innerHTML = '';
+            
+            for (let days = 0; days <= 10; days++) {
+                const classesMissed = days * classesPerDay;
+                const newTotal = totalClasses + classesMissed;
+                const newPercentage = (classesAttended / newTotal) * 100;
+                
+                const row = document.createElement('tr');
+                
+                // Add animation delay for staggered effect
+                row.style.animationDelay = `${days * 0.1}s`;
+                
+                row.innerHTML = `
+                    <td>${days}</td>
+                    <td>${classesMissed}</td>
+                    <td>${newPercentage.toFixed(2)}%</td>
+                    <td>${newPercentage >= 75 ? 
+                        '<span class="success">Safe</span>' : 
+                        '<span class="danger">Below 75%</span>'}</td>
+                `;
+                
+                table.appendChild(row);
+            }
+        }
+
+        // Initialize with some sample values for demonstration
+        window.onload = function() {
+            document.getElementById('classes-attended').value = 45;
+            document.getElementById('total-classes').value = 60;
+            calculateAttendance();
+            calculateLeaveImpact();
+        }
+    </script>
+</body>
+<!-- Home Button -->
+<style>
+    .home-button-bottom {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        animation: pulse 2s infinite;
+    }
+    
+    .home-button-bottom:hover {
+        background: var(--secondary);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    .home-button-bottom i {
+        font-size: 24px;
+    }
+    
+    .home-button-bottom .text {
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+        transition: width 0.3s ease;
+    }
+    
+    .home-button-bottom:hover .text {
+        width: 120px;
+    }
+    
+    @media (max-width: 768px) {
+        .home-button-bottom {
+            bottom: 20px;
+            left: 20px;
+            padding: 12px 15px;
+        }
+        
+        .home-button-bottom:hover .text {
+            width: 0;
+        }
+    }
+</style>
+
+<button class="home-button-bottom" onclick="goToHome()">
+    <i class="fas fa-home"></i>
+    <span class="text">Back to Home</span>
+</button>
+
+<script>
+    function goToHome() {
+        // Replace with your actual home page URL
+        window.location.href = "https://your-university-website.com";
+    }
+    
+</script>
+<!-- Home Button -->
+<style>
+    .home-button-bottom {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        animation: pulse 2s infinite;
+    }
+    
+    .home-button-bottom:hover {
+        background: var(--secondary);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    .home-button-bottom i {
+        font-size: 24px;
+    }
+    
+    .home-button-bottom .text {
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+        transition: width 0.3s ease;
+    }
+    
+    .home-button-bottom:hover .text {
+        width: 120px;
+    }
+    
+    @media (max-width: 768px) {
+        .home-button-bottom {
+            bottom: 20px;
+            left: 20px;
+            padding: 12px 15px;
+        }
+        
+        .home-button-bottom:hover .text {
+            width: 0;
+        }
+    }
+</style>
+
+<button class="home-button-bottom" onclick="goToHome()">
+    <i class="fas fa-home"></i>
+    <span class="text">Back to Home</span>
+</button>
+
+<script>
+    function goToHome() {
+        // Redirect to index.html
+        window.location.href = "index.html";
+    }
+</script>
+</html>

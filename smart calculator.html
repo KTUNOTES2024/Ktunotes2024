@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Attendance Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 25px;
+            margin-bottom: 30px;
+            animation: slideUp 0.5s ease;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .leave-impact-btn {
+            background: linear-gradient(45deg, #e63946, #ff6b6b);
+            color: #fff;
+            margin-top: 15px;
+            padding: 16px 30px;
+            font-size: 18px;
+            width: 100%;
+            justify-content: center;
+            animation: pulseDanger 2s infinite;
+        }
+        
+        .leave-impact-btn:hover {
+            background: linear-gradient(45deg, #d90429, #e63946);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(229, 57, 70, 0.4);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .result-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .highlight {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .danger {
+            color: var(--danger);
+        }
+        
+        .success {
+            color: var(--success);
+        }
+        
+        .warning {
+            color: #ff9e00;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            animation: pulse 2s infinite;
+        }
+        
+        .subject-list {
+            list-style-type: none;
+            margin-top: 15px;
+        }
+        
+        .subject-list li {
+            padding: 10px;
+            background: #f8f9fa;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .subject-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        .celebration {
+            text-align: center;
+            padding: 20px;
+            animation: celebrate 1s ease;
+        }
+        
+        .subject-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            animation: slideIn 0.5s ease;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            flex: 1;
+            margin: 0 10px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .subject-inputs {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                flex-direction: column;
+            }
+            
+            .stat-box {
+                margin: 10px 0;
+            }
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.2); }
+            70% { box-shadow: 0 0 0 10px rgba(67, 97, 238, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0); }
+        }
+        
+        @keyframes pulseDanger {
+            0% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(230, 57, 70, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0); }
+        }
+        
+        @keyframes celebrate {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+            animation: confettiFall 5s ease-in-out infinite;
+        }
+        
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        /* Google Pay-like dopamine animation */
+        @keyframes dopaminePulse {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        @keyframes partyPopper {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            50% { transform: translateY(-50px) scale(1.2); opacity: 1; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
+        
+        @keyframes alertPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .dopamine-celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .alert-warning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .celebration-content {
+            text-align: center;
+            animation: dopaminePulse 1s ease infinite;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .alert-content {
+            text-align: center;
+            animation: alertPulse 1s ease infinite, shake 0.5s ease-in-out 3;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.3);
+            border: 3px solid #e63946;
+            max-width: 400px;
+        }
+        
+        .celebration-content h2 {
+            font-size: 3rem;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+        }
+        
+        .alert-content h2 {
+            font-size: 2.5rem;
+            color: #e63946;
+            margin-bottom: 20px;
+        }
+        
+        .celebration-content p {
+            font-size: 1.5rem;
+            color: #4ecdc4;
+        }
+        
+        .alert-content p {
+            font-size: 1.3rem;
+            color: #e63946;
+            font-weight: 600;
+        }
+        
+        .emoji {
+            font-size: 3rem;
+            position: absolute;
+            animation: floatUp 3s ease-in-out forwards;
+        }
+        
+        .alert-emoji {
+            font-size: 2.5rem;
+            position: absolute;
+            animation: floatUp 3s ease-in-out forwards;
+        }
+        
+        .party-popper {
+            position: absolute;
+            font-size: 2rem;
+            animation: partyPopper 2s ease-out forwards;
+        }
+        
+        .alert-symbol {
+            position: absolute;
+            font-size: 2rem;
+            animation: partyPopper 2s ease-out forwards;
+        }
+        
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: fireworkExplode 1s ease-out forwards;
+        }
+        
+        .alert-line {
+            position: absolute;
+            height: 3px;
+            background: #e63946;
+            animation: alertLine 1s ease-out forwards;
+        }
+        
+        @keyframes fireworkExplode {
+            0% { transform: translate(0, 0) scale(0); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0; }
+        }
+        
+        @keyframes alertLine {
+            0% { transform: scaleX(0); opacity: 1; }
+            100% { transform: scaleX(1); opacity: 0; }
+        }
+        
+        .low-attendance-alert {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 5px solid #e63946;
+            animation: pulseDanger 2s infinite;
+        }
+        
+    </style>
+</head>
+<body>
+      <!-- WhatsApp Group Box -->
+    <title>WhatsApp Group Button</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --whatsapp: #25D366;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .whatsapp-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--whatsapp);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-button:hover {
+            background: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .whatsapp-button i {
+            font-size: 24px;
+        }
+        
+        .whatsapp-button .text {
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .whatsapp-button:hover .text {
+            width: 160px;
+        }
+        
+       
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        @media (max-width: 768px) {
+            .whatsapp-button {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 15px;
+            }
+            
+            .whatsapp-button:hover .text {
+                width: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+  <a href="https://chat.whatsapp.com/DzbgHi9JYCw7SOqFDVDIrE" target="_blank" class="whatsapp-button">
+        <i class="fab fa-whatsapp"></i>
+        <span class="text">Join Our Group</span>
+    </a>
+
+    <script>
+        // Optional: Add a slight delay before showing the text on page load
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.whatsapp-button .text').style.width = '0';
+            }, 2000);
+        });
+    </script>
+
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-calculator"></i> Smart Attendance Calculator</h1>
+            <p class="subtitle">Track your attendance subject-wise and plan your leaves wisely</p>
+        </header>
+        
+        <div class="grid">
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-graduation-cap"></i> Department Selection</h2>
+                <div class="form-group">
+                    <label for="department">Select Your Department</label>
+                    <select id="department">
+                        <option value="">-- Select Department --</option>
+                        <option value="cse">Computer Science & Engineering</option>
+                        <option value="it">Information Technology</option>
+                        <option value="ece">Electronics & Communication</option>
+                        <option value="eee">Electrical & Electronics</option>
+                        <option value="civil">Civil Engineering</option>
+                        <option value="mech">Mechanical Engineering</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="calculation-type">Calculation Type</label>
+                    <select id="calculation-type">
+                        <option value="single">Single Subject Calculation</option>
+                        <option value="daily">Daily Subjects Calculation</option>
+                    </select>
+                </div>
+                
+                <div class="info-box">
+                    <p><i class="fas fa-info-circle"></i> Always check your official attendance in ET Lab for accurate records.</p>
+                </div>
+
+                <button class="leave-impact-btn" onclick="window.location.href='leave impact.html'">
+                    <i class="fas fa-calendar-minus"></i> Calculate Leave Impact
+                </button>
+            </div>
+            
+            <div class="card" id="subject-selection-card">
+                <h2 class="card-title"><i class="fas fa-book"></i> Subject Selection</h2>
+                <div id="single-subject-form">
+                    <div class="form-group">
+                        <label for="subject">Select Subject</label>
+                        <select id="subject">
+                            <option value="">-- Select a Subject --</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="classes-per-day">How many times does this subject occur in a day?</label>
+                        <input type="number" id="classes-per-day" min="1" max="8" value="1" placeholder="e.g., 1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="attended-single">Classes Attended</label>
+                        <input type="number" id="attended-single" min="0" placeholder="Classes attended">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="total-single">Total Classes Held</label>
+                        <input type="number" id="total-single" min="1" placeholder="Total classes held">
+                    </div>
+                    
+                    <button onclick="calculateSingleSubject()"><i class="fas fa-calculator"></i> Calculate</button>
+                </div>
+                
+                <div id="daily-subjects-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="subjects-count">How many subjects do you have in a day?</label>
+                        <input type="number" id="subjects-count" min="1" max="8" value="6" placeholder="e.g., 6">
+                    </div>
+                    
+                    <button onclick="setupDailySubjects()"><i class="fas fa-cog"></i> Setup Subjects</button>
+                    
+                    <div id="daily-subjects-container"></div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-chart-pie"></i> Attendance Results</h2>
+                <div class="result-box">
+                    <h3>Current Attendance: <span id="current-percentage">-</span></h3>
+                    <div class="progress-bar">
+                        <div class="progress" id="progress-bar" style="width: 0%; background: var(--warning);"></div>
+                    </div>
+                    <p id="attendance-status">Enter your data to see your status</p>
+                    
+                    <div id="celebration" class="celebration" style="display: none;">
+                        <i class="fas fa-trophy" style="font-size: 3rem; color: gold;"></i>
+                        <h3 class="success">Congratulations! You've reached 75% attendance!</h3>
+                    </div>
+
+                    <div id="low-attendance-alert" class="low-attendance-alert" style="display: none;">
+                        <h3 class="danger"><i class="fas fa-exclamation-triangle"></i> Low Attendance Alert!</h3>
+                        <p>Your attendance is below 75%. You need to attend more classes to avoid detention.</p>
+                    </div>
+                </div>
+                
+                <div class="result-box">
+                    <h3>Compensation Needed</h3>
+                    <p id="compensation-message">You need to attend <span class="highlight" id="classes-needed">-</span> out of next <span class="highlight" id="total-upcoming">-</span> classes to reach 75%.</p>
+                    <p id="compensation-details">Enter your attendance data first</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-list-alt"></i> Subject Summary</h2>
+                <div id="subject-summary">
+                    <p>Your subjects will appear here after calculation</p>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-box">
+                        <h4>Best Subject</h4>
+                        <p id="best-subject">-</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>Needs Attention</h4>
+                        <p id="worst-subject">-</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© KTU NOTES 2024 Smart Attendance Calculator | Always verify with your official ET Lab records</p>
+        </footer>
+    </div>
+
+    <script>
+        // Department subjects data
+        const departmentSubjects = {
+            cse: [
+                "Mathematics for Computer and Information Science - 3",
+                "Theory of Computation",
+                "Data Structures and Algorithms",
+                "Object Oriented Programming",
+                "Digital Electronics and Logic Design",
+                "Economics for Engineers",
+                "Engineering Ethics and Sustainable Development",
+                "Data Structures Lab",
+                "Digital Lab"
+            ],
+            it: [
+                "Mathematics for Computer and Information Science - 3",
+                "Computer Organisation and Architecture",
+                "Data Structures",
+                "Database Management System",
+                "Digital Electronics and Logic Design",
+                "Economics for Engineers",
+                "Engineering Ethics and Sustainable Development",
+                "Programming in Python Lab",
+                "Data Structures Lab"
+            ],
+            ece: [
+                "Electronic Devices and Circuits",
+                "Electrical Machines – I",
+                "Network Theory",
+                "Analog Electronics Circuits",
+                "Mathematics – III (Transform Techniques for Electrical Engineering)",
+                "Economics for Engineers",
+                "Engineering Ethics and Sustainable Development",
+                "Electronic Devices and Circuits Lab",
+                "Electrical Machines Lab – I"
+            ],
+            eee: [
+                "Mathematics for Electrical Science and Physical Science – 3",
+                "Circuits and Networks",
+                "DC Machines and Transformers",
+                "Analog Electronics",
+                "Introduction to Artificial Intelligence and Data Science",
+                "Economics for Engineers",
+                "Engineering Ethics and Sustainable Development",
+                "Circuits and Measurements Lab",
+                "Analog Electronics Lab"
+            ],
+            civil: [
+                "Mathematics for Electrical Science and Physical Science – 3",
+                "Fluid Mechanics",
+                "Structural Analysis - I",
+                "Surveying and Geomatics",
+                "Introduction to Artificial Intelligence and Data Science",
+                "Economics for Engineers",
+                "Engineering Ethics and Sustainable Development",
+                "Survey Lab",
+                "Fluid Mechanics Lab"
+            ],
+            mech: [
+                "Mathematics for Electrical Science and Physical Science – 3",
+                "Mechanics of Solids",
+                "Fluid Mechanics and Machinery",
+                "Manufacturing Processes",
+                "Introduction to Artificial Intelligence and Data Science",
+                "Economics for Engineers",
+                "Engineering Ethics and Sustainable Development",
+                "Computer Aided Machine Drawing & Modelling",
+                "Materials Testing Lab"
+            ]
+        };
+
+        // Global variables
+        let selectedDepartment = '';
+        let subjectsData = {};
+
+        // Update subjects when department changes
+        document.getElementById('department').addEventListener('change', function() {
+            selectedDepartment = this.value;
+            const subjectSelect = document.getElementById('subject');
+            subjectSelect.innerHTML = '<option value="">-- Select a Subject --</option>';
+            
+            if (selectedDepartment && departmentSubjects[selectedDepartment]) {
+                departmentSubjects[selectedDepartment].forEach(subject => {
+                    const option = document.createElement('option');
+                    option.value = subject.toLowerCase().replace(/\s+/g, '-');
+                    option.textContent = subject;
+                    subjectSelect.appendChild(option);
+                });
+            }
+        });
+
+        // Toggle between single and daily calculation
+        document.getElementById('calculation-type').addEventListener('change', function() {
+            const calculationType = this.value;
+            if (calculationType === 'single') {
+                document.getElementById('single-subject-form').style.display = 'block';
+                document.getElementById('daily-subjects-form').style.display = 'none';
+            } else {
+                document.getElementById('single-subject-form').style.display = 'none';
+                document.getElementById('daily-subjects-form').style.display = 'block';
+            }
+        });
+
+        // Set up daily subjects form
+        function setupDailySubjects() {
+            const subjectsCount = parseInt(document.getElementById('subjects-count').value);
+            const container = document.getElementById('daily-subjects-container');
+            container.innerHTML = '';
+            
+            if (isNaN(subjectsCount) || subjectsCount < 1 || subjectsCount > 8) {
+                alert('Please enter a valid number of subjects between 1 and 8');
+                return;
+            }
+            
+            for (let i = 1; i <= subjectsCount; i++) {
+                const subjectDiv = document.createElement('div');
+                subjectDiv.className = 'subject-card';
+                subjectDiv.innerHTML = `
+                    <h3>Subject ${i}</h3>
+                    <div class="form-group">
+                        <label for="subject-${i}">Subject Name</label>
+                        <select id="subject-${i}">
+                            <option value="">-- Select Subject --</option>
+                            ${selectedDepartment && departmentSubjects[selectedDepartment] ? 
+                                departmentSubjects[selectedDepartment].map(subject => 
+                                    `<option value="${subject.toLowerCase().replace(/\s+/g, '-')}">${subject}</option>`
+                                ).join('') : ''
+                            }
+                        </select>
+                    </div>
+                    <div class="subject-inputs">
+                        <div class="form-group">
+                            <label for="attended-${i}">Classes Attended</label>
+                            <input type="number" id="attended-${i}" min="0" placeholder="Attended">
+                        </div>
+                        <div class="form-group">
+                            <label for="total-${i}">Total Classes</label>
+                            <input type="number" id="total-${i}" min="1" placeholder="Total">
+                        </div>
+                    </div>
+                `;
+                container.appendChild(subjectDiv);
+            }
+            
+            container.innerHTML += `<button onclick="calculateDailySubjects()"><i class="fas fa-calculator"></i> Calculate All</button>`;
+        }
+
+        // Calculate single subject attendance
+        function calculateSingleSubject() {
+            const subject = document.getElementById('subject').value;
+            const classesPerDay = parseInt(document.getElementById('classes-per-day').value);
+            const attended = parseInt(document.getElementById('attended-single').value);
+            const total = parseInt(document.getElementById('total-single').value);
+            
+            if (!subject || isNaN(classesPerDay) || isNaN(attended) || isNaN(total)) {
+                alert('Please fill all fields with valid values');
+                return;
+            }
+            
+            if (attended > total) {
+                alert('Classes attended cannot be more than total classes');
+                return;
+            }
+            
+            const percentage = (attended / total) * 100;
+            updateResults(percentage, attended, total);
+            
+            // Store subject data
+            subjectsData = {
+                [subject]: { attended, total, percentage }
+            };
+            
+            updateSubjectSummary();
+            calculateCompensation();
+        }
+
+        // Calculate daily subjects attendance
+        function calculateDailySubjects() {
+            const subjectsCount = parseInt(document.getElementById('subjects-count').value);
+            subjectsData = {};
+            let totalAttended = 0;
+            let totalClasses = 0;
+            
+            for (let i = 1; i <= subjectsCount; i++) {
+                const subjectElem = document.getElementById(`subject-${i}`);
+                const attendedElem = document.getElementById(`attended-${i}`);
+                const totalElem = document.getElementById(`total-${i}`);
+                
+                if (!subjectElem.value || !attendedElem.value || !totalElem.value) {
+                    alert(`Please fill all fields for Subject ${i}`);
+                    return;
+                }
+                
+                const attended = parseInt(attendedElem.value);
+                const total = parseInt(totalElem.value);
+                
+                if (attended > total) {
+                    alert(`Classes attended cannot be more than total classes for Subject ${i}`);
+                    return;
+                }
+                
+                const percentage = (attended / total) * 100;
+                subjectsData[subjectElem.value] = { attended, total, percentage };
+                
+                totalAttended += attended;
+                totalClasses += total;
+            }
+            
+            const overallPercentage = (totalAttended / totalClasses) * 100;
+            updateResults(overallPercentage, totalAttended, totalClasses);
+            updateSubjectSummary();
+            calculateCompensation();
+        }
+
+        // Update results display
+        function updateResults(percentage, attended, total) {
+            document.getElementById('current-percentage').textContent = percentage.toFixed(2) + '%';
+            
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = `${Math.min(percentage, 100)}%`;
+            
+            const statusElement = document.getElementById('attendance-status');
+            const celebration = document.getElementById('celebration');
+            const lowAttendanceAlert = document.getElementById('low-attendance-alert');
+            
+            if (percentage >= 75) {
+                progressBar.style.background = 'var(--success)';
+                statusElement.innerHTML = '<span class="success">Excellent! Your attendance is above 75%</span>';
+                celebration.style.display = 'block';
+                lowAttendanceAlert.style.display = 'none';
+                createDopamineCelebration();
+            } else if (percentage >= 60) {
+                progressBar.style.background = 'var(--warning)';
+                statusElement.innerHTML = '<span class="warning">Warning! Your attendance is below 75%</span>';
+                celebration.style.display = 'none';
+                lowAttendanceAlert.style.display = 'block';
+                createLowAttendanceAlert(percentage);
+            } else {
+                progressBar.style.background = 'var(--danger)';
+                statusElement.innerHTML = '<span class="danger">Critical! Your attendance is very low</span>';
+                celebration.style.display = 'none';
+                lowAttendanceAlert.style.display = 'block';
+                createLowAttendanceAlert(percentage);
+            }
+        }
+
+        // Calculate compensation needed
+        function calculateCompensation() {
+            if (Object.keys(subjectsData).length === 0) return;
+            
+            // Calculate overall attendance
+            let totalAttended = 0;
+            let totalClasses = 0;
+            
+            for (const subject in subjectsData) {
+                totalAttended += subjectsData[subject].attended;
+                totalClasses += subjectsData[subject].total;
+            }
+            
+            const currentPercentage = (totalAttended / totalClasses) * 100;
+            
+            if (currentPercentage >= 75) {
+                document.getElementById('compensation-message').innerHTML = 
+                    '<span class="success">You already have 75% or more attendance. No compensation needed!</span>';
+                document.getElementById('compensation-details').textContent = '';
+                return;
+            }
+            
+            // Calculate how many classes needed to reach 75%
+            const required = Math.ceil((0.75 * (totalClasses + 20) - totalAttended) / 0.25);
+            const upcomingTotal = 20; // Assume 20 upcoming classes for calculation
+            
+            document.getElementById('classes-needed').textContent = Math.max(0, required);
+            document.getElementById('total-upcoming').textContent = upcomingTotal;
+            
+            const detailsElement = document.getElementById('compensation-details');
+            if (required <= 0) {
+                detailsElement.innerHTML = '<span class="success">You can skip all upcoming classes and still maintain 75%</span>';
+            } else if (required > upcomingTotal) {
+                detailsElement.innerHTML = `<span class="danger">You need to attend all ${upcomingTotal} classes and more to reach 75%</span>`;
+            } else {
+                detailsElement.innerHTML = `<span class="warning">You can skip ${upcomingTotal - required} out of ${upcomingTotal} upcoming classes</span>`;
+            }
+        }
+
+        // Update subject summary
+        function updateSubjectSummary() {
+            const summaryElement = document.getElementById('subject-summary');
+            summaryElement.innerHTML = '';
+            
+            if (Object.keys(subjectsData).length === 0) {
+                summaryElement.innerHTML = '<p>No subject data available</p>';
+                return;
+            }
+            
+            let bestSubject = { name: '', percentage: -1 };
+            let worstSubject = { name: '', percentage: 101 };
+            
+            for (const subject in subjectsData) {
+                const { attended, total, percentage } = subjectsData[subject];
+                const subjectName = subject.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                
+                const subjectDiv = document.createElement('div');
+                subjectDiv.className = 'subject-card';
+                subjectDiv.innerHTML = `
+                    <h4>${subjectName}</h4>
+                    <p>Attended: ${attended} / ${total} (${percentage.toFixed(2)}%)</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: ${percentage}%; background: ${percentage >= 75 ? 'var(--success)' : percentage >= 60 ? 'var(--warning)' : 'var(--danger)'};"></div>
+                    </div>
+                `;
+                summaryElement.appendChild(subjectDiv);
+                
+                // Track best and worst subjects
+                if (percentage > bestSubject.percentage) {
+                    bestSubject = { name: subjectName, percentage };
+                }
+                if (percentage < worstSubject.percentage) {
+                    worstSubject = { name: subjectName, percentage };
+                }
+            }
+            
+            document.getElementById('best-subject').textContent = `${bestSubject.name} (${bestSubject.percentage.toFixed(2)}%)`;
+            document.getElementById('worst-subject').textContent = `${worstSubject.name} (${worstSubject.percentage.toFixed(2)}%)`;
+        }
+
+        // Create Google Pay-like dopamine celebration
+        function createDopamineCelebration() {
+            // Create celebration container
+            const celebration = document.createElement('div');
+            celebration.className = 'dopamine-celebration';
+            
+            // Create celebration content
+            const content = document.createElement('div');
+            content.className = 'celebration-content';
+            content.innerHTML = `
+                <h2>🎉 Congratulations! 🎉</h2>
+                <p>You've reached 75% attendance!</p>
+            `;
+            
+            celebration.appendChild(content);
+            document.body.appendChild(celebration);
+            
+            // Create emojis floating up
+            const emojis = ['🎓', '⭐', '🔥', '💯', '🏆', '👍', '🚀', '✨'];
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const emoji = document.createElement('div');
+                    emoji.className = 'emoji';
+                    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    emoji.style.left = `${Math.random() * 100}%`;
+                    emoji.style.animationDuration = `${2 + Math.random() * 2}s`;
+                    celebration.appendChild(emoji);
+                    
+                    // Remove emoji after animation
+                    setTimeout(() => {
+                        emoji.remove();
+                    }, 3000);
+                }, i * 150);
+            }
+            
+            // Create party poppers
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const popper = document.createElement('div');
+                    popper.className = 'party-popper';
+                    popper.textContent = '🎉';
+                    popper.style.left = `${Math.random() * 100}%`;
+                    popper.style.bottom = '0';
+                    celebration.appendChild(popper);
+                    
+                    // Remove popper after animation
+                    setTimeout(() => {
+                        popper.remove();
+                    }, 2000);
+                }, i * 300);
+            }
+            
+            // Create fireworks
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.className = 'firework';
+                    firework.style.left = `${Math.random() * 100}%`;
+                    firework.style.top = `${Math.random() * 100}%`;
+                    firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 60%)`;
+                    firework.style.setProperty('--tx', `${(Math.random() - 0.5) * 100}px`);
+                    firework.style.setProperty('--ty', `${(Math.random() - 0.5) * 100}px`);
+                    celebration.appendChild(firework);
+                    
+                    // Remove firework after animation
+                    setTimeout(() => {
+                        firework.remove();
+                    }, 1000);
+                }, i * 200);
+            }
+            
+            // Remove celebration after some time
+            setTimeout(() => {
+                celebration.remove();
+            }, 5000);
+        }
+
+        // Create low attendance alert animation
+        function createLowAttendanceAlert(percentage) {
+            // Create alert container
+            const alert = document.createElement('div');
+            alert.className = 'alert-warning';
+            
+            // Create alert content
+            const content = document.createElement('div');
+            content.className = 'alert-content';
+            content.innerHTML = `
+                <h2>⚠️ Attendance Alert!</h2>
+                <p>Your attendance is ${percentage.toFixed(2)}%</p>
+                <p>You need to attend more classes!</p>
+            `;
+            
+            alert.appendChild(content);
+            document.body.appendChild(alert);
+            
+            // Create warning symbols
+            const symbols = ['⚠️', '🔴', '⛔', '🚫'];
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const symbol = document.createElement('div');
+                    symbol.className = 'alert-symbol';
+                    symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                    symbol.style.left = `${Math.random() * 100}%`;
+                    symbol.style.bottom = '0';
+                    alert.appendChild(symbol);
+                    
+                    // Remove symbol after animation
+                    setTimeout(() => {
+                        symbol.remove();
+                    }, 2000);
+                }, i * 300);
+            }
+            
+            // Create alert lines
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const line = document.createElement('div');
+                    line.className = 'alert-line';
+                    line.style.left = `${Math.random() * 100}%`;
+                    line.style.top = `${Math.random() * 100}%`;
+                    line.style.width = `${20 + Math.random() * 50}px`;
+                    line.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    alert.appendChild(line);
+                    
+                    // Remove line after animation
+                    setTimeout(() => {
+                        line.remove();
+                    }, 1000);
+                }, i * 250);
+            }
+            
+            // Remove alert after some time
+            setTimeout(() => {
+                alert.remove();
+            }, 4000);
+        }
+    </script>
+<!-- Home Button -->
+<style>
+    .home-button-bottom {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        animation: pulse 2s infinite;
+    }
+    
+    .home-button-bottom:hover {
+        background: var(--secondary);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    .home-button-bottom i {
+        font-size: 24px;
+    }
+    
+    .home-button-bottom .text {
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+        transition: width 0.3s ease;
+    }
+    
+    .home-button-bottom:hover .text {
+        width: 120px;
+    }
+    
+    @media (max-width: 768px) {
+        .home-button-bottom {
+            bottom: 20px;
+            left: 20px;
+            padding: 12px 15px;
+        }
+        
+        .home-button-bottom:hover .text {
+            width: 0;
+        }
+    }
+</style>
+
+<button class="home-button-bottom" onclick="goToHome()">
+    <i class="fas fa-home"></i>
+    <span class="text">Back to Home</span>
+</button>
+
+<script>
+    function goToHome() {
+        // Redirect to index.html
+        window.location.href = "index.html";
+    }
+</script>
+</body>
+
+</html>

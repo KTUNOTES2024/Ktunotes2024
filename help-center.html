@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help Center – KTU 2024 | Student Resources Portal</title>
+  <meta name="description" content="Comprehensive help center for KTU 2024 students - access study materials, syllabus, calculators, and academic resources.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4e54c8;
+      --primary-dark: #3f42b6;
+      --secondary: #00c6ff;
+      --accent: #8e44ad;
+      --dark: #1a1a2e;
+      --darker: #0f0f1a;
+      --light: #f8f9ff;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #ffffff;
+      --text-secondary: #b8b8d0;
+    }
+    
+    * {
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    
+    header {
+      text-align: center;
+      padding: 3.5rem 2rem;
+      background: linear-gradient(135deg, rgba(78, 84, 200, 0.15) 0%, rgba(0, 198, 255, 0.1) 100%);
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--card-border);
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%234e54c8' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,218.7C672,224,768,160,864,138.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+    }
+    
+    header h1 {
+      font-size: 2.8rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      position: relative;
+      display: inline-block;
+    }
+    
+    header h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+    
+    header p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--text-secondary);
+    }
+    
+    .header-icon {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-right: 10px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .help-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 2.2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .help-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .help-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+      border-color: rgba(78, 84, 200, 0.3);
+    }
+    
+    .help-card:hover::before {
+      opacity: 1;
+    }
+    
+    .help-card h2 {
+      color: var(--text-primary);
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    
+    .help-card p {
+      margin-bottom: 1.5rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    .help-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .help-links a {
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--light);
+      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 15px rgba(78, 84, 200, 0.3);
+      font-size: 0.9rem;
+    }
+    
+    .help-links a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(78, 84, 200, 0.4);
+      background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+    }
+    
+    .note {
+      background: rgba(0, 198, 255, 0.08);
+      border-left: 4px solid var(--secondary);
+      padding: 1.2rem;
+      margin: 1.5rem 0;
+      border-radius: 6px;
+      position: relative;
+    }
+    
+    .note strong {
+      color: var(--secondary);
+    }
+    
+    ul, ol {
+      padding-left: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    li {
+      margin-bottom: 0.8rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+    
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    
+    .feature-item {
+      background: rgba(78, 84, 200, 0.08);
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid rgba(78, 84, 200, 0.15);
+      transition: all 0.3s ease;
+    }
+    
+    .feature-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      border-color: rgba(78, 84, 200, 0.3);
+      background: rgba(78, 84, 200, 0.12);
+    }
+    
+    .feature-item h3 {
+      color: var(--text-primary);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    
+    .feature-item p {
+      font-size: 0.95rem;
+      margin-bottom: 0;
+    }
+    
+    .feature-item a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: rgba(78, 84, 200, 0.2);
+      color: var(--text-primary);
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    
+    .feature-item a:hover {
+      background: rgba(78, 84, 200, 0.3);
+    }
+    
+    .security-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(46, 204, 113, 0.1);
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      margin: 1rem 0;
+      border: 1px solid rgba(46, 204, 113, 0.2);
+      color: #2ecc71;
+      font-weight: 500;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      position: relative;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+    
+    /* Animation for cards */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .help-card {
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
+    
+    .help-card:nth-child(1) { animation-delay: 0.1s; }
+    .help-card:nth-child(2) { animation-delay: 0.2s; }
+    .help-card:nth-child(3) { animation-delay: 0.3s; }
+    .help-card:nth-child(4) { animation-delay: 0.4s; }
+    .help-card:nth-child(5) { animation-delay: 0.5s; }
+    .help-card:nth-child(6) { animation-delay: 0.6s; }
+    .help-card:nth-child(7) { animation-delay: 0.7s; }
+    .help-card:nth-child(8) { animation-delay: 0.8s; }
+    
+    /* Responsive design */
+    @media (max-width: 1100px) {
+      .cards-container {
+        grid-template-columns: 1fr;
+      }
+      
+      header h1 {
+        font-size: 2.5rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+      }
+      
+      header {
+        padding: 2.5rem 1.5rem;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      .help-card {
+        padding: 1.8rem;
+      }
+      
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .help-links {
+        flex-direction: column;
+      }
+      
+      .help-links a {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><i class="fas fa-circle-question header-icon"></i> Help Center</h1>
+<p>
+  You can access the website by typing 
+  <a href="https://ktunotes.live/" target="_blank">ktunotes.live</a> 
+  or 
+  <a href="https://ktu-notes-2024.web.app" target="_blank">ktu-notes-2024.web.app</a>.
+  or
+    <a href="https://ktu2024.web.app/" target="_blank">ktu2024.web.app</a>.
+</p>
+</header>
+
+  <div class="container">
+    <div class="cards-container">
+      <!-- About the Initiative -->
+      <div class="help-card">
+        <h2><i class="fas fa-users"></i> About This Initiative</h2>
+        <p>This platform represents a <strong>student-led initiative created by students, exclusively for students</strong>. Our mission centers on making academic resources readily accessible and assisting you in navigating your engineering journey more effectively.</p>
+        <p>All materials undergo careful curation and organization to optimize your study time and academic efforts
+          You can access our website anytime by visiting ktunotes.live or ktu2024.web.app or ktu-notes-2024.web.app..(search without giveing them spaces)</p>
+        <div class="security-badge">
+          <i class="fas fa-shield-alt"></i> 100% Free | Data Safe and Secure | Encrypted
+        </div>
+      </div>
+
+      <!-- General Help -->
+      <div class="help-card">
+        <h2><i class="fas fa-info-circle"></i> Getting Started</h2>
+        <p>Our portal provides semester-wise study materials, syllabus documents, specialized calculators, and academic tools designed to streamline your educational experience.</p>
+        <div class="help-links">
+          <a href="index.html"><i class="fas fa-home"></i> Back to Home</a>
+        </div>
+      </div>
+
+      <!-- Study Materials -->
+      <div class="help-card">
+        <h2><i class="fas fa-book-open"></i> Study Materials Access</h2>
+        <p>We offer comprehensive study resources for <strong>Semesters 1 through 8</strong> of the KTU 2024 curriculum:</p>
+        
+        <div class="note">
+          <p><strong>Semesters 1 & 2:</strong> These contain common subjects across all branches. Each subject features dedicated cards with direct access to:</p>
+          <ul>
+            <li><strong>Module Notes</strong> - Systematically organized study materials by topic</li>
+            <li><strong>Question Papers</strong> - Previous examination papers for comprehensive practice</li>
+          </ul>
+          <p>Selecting any resource button will redirect you to Google Drive for seamless viewing and downloading.</p>
+        </div>
+        
+        <div class="note">
+          <p><strong>Semesters 3-8:</strong> These comprise department-specific subjects. Simply:</p>
+          <ol>
+            <li>Select your academic department from the available options</li>
+            <li>Choose your current semester</li>
+            <li>Access subject-specific materials including modules and previous question papers</li>
+          </ol>
+        </div>
+        
+        <div class="help-links">
+          <a href="index.html"><i class="fas fa-arrow-right"></i> Access Study Materials</a>
+        </div>
+      </div>
+
+      <!-- Syllabus -->
+      <div class="help-card">
+        <h2><i class="fas fa-book"></i> Syllabus & Curriculum</h2>
+        <p>Access and download the official KTU 2024 syllabus for all branches from Semester 1 to 8 through our interactive PDF viewer featuring multiple options:</p>
+        
+        <div class="feature-grid">
+          <div class="feature-item">
+            <h3><i class="fas fa-eye"></i> Online Viewing</h3>
+            <p>Examine PDFs directly within your browser without downloading</p>
+          </div>
+          <div class="feature-item">
+            <h3><i class="fas fa-download"></i> Direct Download</h3>
+            <p>Download syllabus PDFs directly to your device</p>
+          </div>
+          <div class="feature-item">
+            <h3><i class="fas fa-envelope"></i> Email Sharing</h3>
+            <p>Conveniently send syllabus PDFs via email</p>
+          </div>
+          <div class="feature-item">
+            <h3><i class="fab fa-google-drive"></i> Drive Integration</h3>
+            <p>Save syllabus documents directly to your Google Drive</p>
+          </div>
+        </div>
+        
+        <div class="help-links">
+          <a href="syllabus.html"><i class="fas fa-arrow-right"></i> Open Syllabus</a>
+        </div>
+      </div>
+
+      <!-- Calculators -->
+      <div class="help-card">
+        <h2><i class="fas fa-calculator"></i> Calculators & Tools</h2>
+        
+        <div class="feature-grid">
+          <div class="feature-item">
+            <h3><i class="fas fa-percentage"></i> SGPA Calculator</h3>
+            <p>Calculate your Semester Grade Point Average with precision</p>
+          </div>
+          <div class="feature-item">
+            <h3><i class="fas fa-chart-line"></i> CGPA Calculator</h3>
+            <p>Compute your Cumulative Grade Point Average across semesters</p>
+          </div>
+          <div class="feature-item">
+            <h3><i class="fas fa-clock"></i> Attendance Calculator</h3>
+            <p>Monitor and calculate your attendance percentage</p>
+          </div>
+          <div class="feature-item">
+            <h3><i class="fas fa-graduation-cap"></i> Percentage Converter</h3>
+            <p>Convert CGPA to percentage and vice versa</p>
+          </div>
+        </div>
+        
+        <div class="help-links">
+          <a href="smart calculator.html"><i class="fas fa-arrow-right"></i> Use Calculators</a>
+        </div>
+      </div>
+
+      <!-- SGPA Calculator -->
+      <div class="help-card">
+        <h2><i class="fas fa-calculator"></i> SGPA Calculator</h2>
+        <p>Our SGPA Calculator enables you to accurately determine your Semester Grade Point Average:</p>
+        
+        <ol>
+          <li>Select your academic branch from the dropdown menu</li>
+          <li>Choose your current semester</li>
+          <li>Input your subject grades (A+, A, B, C, etc.)</li>
+          <li>Click "Calculate SGPA" to view your results</li>
+          <li>Use the "Reset" option to clear all entries</li>
+        </ol>
+        
+        <div class="note">
+          <p><strong>New Feature:</strong> You can now download your SGPA calculation results as a PNG image for your records or sharing purposes.</p>
+        </div>
+        
+        <div class="help-links">
+          <a href="https://ktugpa.github.io/"><i class="fas fa-arrow-right"></i> Open SGPA Calculator</a>
+        </div>
+      </div>
+
+      <!-- Spotify -->
+      <div class="help-card">
+        <h2><i class="fab fa-spotify"></i> Spotify Study Playlist</h2>
+        <p>Enhance your study sessions with our specially curated Spotify playlists designed to improve focus and concentration.</p>
+        <p>The playlists feature:</p>
+        <ul>
+          <li>Lo-fi beats for relaxed studying</li>
+          <li>Instrumental music to minimize distractions</li>
+          <li>Focus-enhancing ambient sounds</li>
+          <li>Curated tracks for extended study sessions</li>
+        </ul>
+        
+        <div class="help-links">
+          <a href="https://open.spotify.com/playlist/7LAkN3NRW8cu4JVJRRU53t?pi=VxjyDOaIT-Sdp" target="_blank"><i class="fab fa-spotify"></i> Open Spotify Playlist</a>
+        </div>
+      </div>
+
+      <!-- YouTube Class -->
+      <div class="help-card">
+        <h2><i class="fab fa-youtube"></i> YouTube Class Links</h2>
+        <p>Access our comprehensive collection of recorded class lectures and educational videos covering various subjects and topics.</p>
+        <p>The YouTube Class Links section provides:</p>
+        <ul>
+          <li>Subject-wise organized video content</li>
+          <li>Recorded classroom lectures</li>
+          <li>Problem-solving tutorials</li>
+          <li>Concept explanation videos</li>
+          <li>Exam preparation guides</li>
+        </ul>
+        
+        <div class="help-links">
+          <a href="https://docs.google.com/spreadsheets/u/2/d/e/2PACX-1vSoz0qPTJoiEhN3bdYdNQHnhs23DX3XazLXCqeCBTYjdA-1yonGUmpP8F3GGtEr0Y1wI3nhSBcQjT9N/pubhtml" target="_blank"><i class="fab fa-youtube"></i> Access YouTube Classes</a>
+        </div>
+      </div>
+
+      <!-- Contribute -->
+      <div class="help-card">
+        <h2><i class="fas fa-hands-helping"></i> Contribute to Our Community</h2>
+        <p>This platform thrives through community contributions. You can help enhance this resource by:</p>
+        <ul>
+          <li>Sharing study materials and notes</li>
+          <li>Providing question papers and solutions</li>
+          <li>Reporting outdated or broken links</li>
+          <li>Suggesting new features and improvements</li>
+          <li>Contributing to our question bank</li>
+        </ul>
+        
+        <div class="help-links">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScESxAHgDhc-eQcK-oOq7Rki7CUfOKAcAdfBG8nRVzgSpj-DQ/viewform" target="_blank"><i class="fas fa-plus-circle"></i> Contribute Now</a>
+        </div>
+      </div>
+
+      <!-- Feedback -->
+      <div class="help-card">
+        <h2><i class="fas fa-comment-dots"></i> Share Your Feedback</h2>
+        <p>Your feedback is essential for improving this platform and ensuring it meets your academic needs.</p>
+        <p>We welcome:</p>
+        <ul>
+          <li>Suggestions for new features</li>
+          <li>Reports of technical issues</li>
+          <li>Requests for additional study materials</li>
+          <li>General comments about your experience</li>
+        </ul>
+        
+        <div class="help-links">
+          <a href="index.html"><i class="fas fa-comment"></i> Provide Feedback</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© KTUNOTES2024  | A Student Initiative</p>
+    <p>All resources are curated by students for academic purposes only</p>
+  </footer>
+</body>
+</html>

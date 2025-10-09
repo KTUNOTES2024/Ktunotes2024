@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Syllabus & Curriculum – KTU 2024</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg1: #0a1128;
+      --bg2: #0c142e;
+      --card: #0f172a;
+      --card-hover: #1e293b;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --text: #ffffff;
+      --muted: #ffffff;
+      --radius: 16px;
+      --radius-lg: 24px;
+      --shadow: 0 10px 40px rgba(0,0,0,0.4);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--text);
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 12px;
+      font-weight: 800;
+      background: linear-gradient(to right, #fff, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: var(--radius);
+      padding: 6px;
+      margin-bottom: 30px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .tab {
+      padding: 12px 28px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .tab::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--accent), var(--accent-hover));
+      opacity: 0;
+      transition: var(--transition);
+      z-index: -1;
+      border-radius: var(--radius);
+    }
+
+    .tab.active::before {
+      opacity: 1;
+    }
+
+    .tab.active {
+      color: white;
+    }
+
+    /* Controls */
+    .controls-container {
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 30px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--shadow);
+    }
+
+    .select {
+      position: relative;
+      flex: 1;
+      min-width: 220px;
+    }
+
+    select {
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text);
+      font-size: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      appearance: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    }
+
+    .select i {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    /* Action buttons */
+    .actions {
+      margin-top: 25px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    .actions.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    button {
+      padding: 16px 32px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+    }
+
+    .view {
+      background: linear-gradient(45deg, var(--accent), var(--accent-hover));
+      color: white;
+    }
+
+    .download {
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .download:hover {
+      background: rgba(30, 41, 59, 0.8);
+    }
+
+    /* PDF Viewer */
+    .pdf-container {
+      margin-top: 36px;
+      width: 100%;
+      max-width: 1000px;
+      position: relative;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: none;
+    }
+
+    .pdf-container.show {
+      opacity: 1;
+      transform: translateY(0);
+      display: block;
+    }
+
+    .pdf-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .pdf-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    .pdf-tools {
+      display: flex;
+      gap: 12px;
+    }
+
+    .pdf-tools button {
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pdf-tools button:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .pdf-viewer {
+      position: relative;
+      height: 70vh;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #0a1426;
+    }
+
+    .fullscreen-btn {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .fullscreen-btn:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Loader */
+    .loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loader::after {
+      content: "";
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(59, 130, 246, 0.2);
+      border-top: 4px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    /* Fullscreen mode */
+    .pdf-container.fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 100;
+      border-radius: 0;
+      max-width: none;
+    }
+
+    /* Download options modal */
+    .download-options {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    .download-options.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .download-modal {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .download-modal h3 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .download-option {
+      padding: 16px;
+      margin-bottom: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .download-option:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .download-option:last-child {
+      margin-bottom: 0;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Animations */
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .controls {
+        flex-direction: column;
+      }
+      
+      .select {
+        width: 100%;
+      }
+      
+      .actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      button {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .pdf-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      
+      .pdf-tools {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Syllabus & Curriculum – KTU 2024</h1>
+      <div class="sub">Access all course materials in one place</div>
+    </header>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab active" id="syllabusTab">
+        <i class="fas fa-book"></i> Syllabus
+      </div>
+      <div class="tab" id="curriculumTab">
+        <i class="fas fa-graduation-cap"></i> Curriculum
+      </div>
+    </div>
+
+    <!-- Syllabus Controls -->
+    <div class="controls-container">
+      <div id="syllabusControls" class="controls">
+        <div class="select">
+          <select id="deptSelect">
+            <option value="" disabled selected>Select Department</option>
+            <option value="CSE">Computer Science & Engineering</option>
+            <option value="ECE">Electronics & Communication</option>
+            <option value="EEE">Electrical & Electronics</option>
+            <option value="AEI">Applied Electronics & Instrumentation</option>
+            <option value="EL">Electronics & Instrumentation</option>
+            <option value="CE">Civil Engineering</option>
+            <option value="IE">Industrial Engineering</option>
+            <option value="ME">Mechanical Engineering</option>
+          </select>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="select">
+          <select id="semSelect">
+            <option value="" disabled selected>Select Semester</option>
+            <option value="S1">Semester 1</option>
+            <option value="S2">Semester 2</option>
+            <option value="S3">Semester 3</option>
+            <option value="S4">Semester 4</option>
+            <option value="S5">Semester 5</option>
+            <option value="S6">Semester 6</option>
+            <option value="S7">Semester 7</option>
+            <option value="S8">Semester 8</option>
+          </select>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+
+      <!-- Curriculum Controls -->
+      <div id="curriculumControls" class="controls" style="display:none;">
+        <div class="select">
+          <select id="currDeptSelect">
+            <option value="" disabled selected>Select Department</option>
+            <option value="CSE">Computer Science & Engineering</option>
+            <option value="ECE">Electronics & Communication</option>
+            <option value="EEE">Electrical & Electronics</option>
+            <option value="AEI">Applied Electronics & Instrumentation</option>
+            <option value="EL">Electronics & Instrumentation</option>
+            <option value="CE">Civil Engineering</option>
+            <option value="IE">Industrial Engineering</option>
+            <option value="ME">Mechanical Engineering</option>
+          </select>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions" id="actions">
+        <button class="view" id="viewBtn">
+          <i class="fas fa-eye"></i> View Document
+        </button>
+        <button class="download" id="downloadBtn">
+          <i class="fas fa-download"></i> Download
+        </button>
+      </div>
+    </div>
+
+    <!-- PDF Viewer -->
+    <div class="pdf-container" id="pdfContainer">
+      <div class="pdf-header">
+        <div class="pdf-title" id="pdfTitle">Document Preview</div>
+        <div class="pdf-tools">
+          <button id="zoomInBtn">
+            <i class="fas fa-search-plus"></i> Zoom In
+          </button>
+          <button id="zoomOutBtn">
+            <i class="fas fa-search-minus"></i> Zoom Out
+          </button>
+          <button id="rotateBtn">
+            <i class="fas fa-redo"></i> Rotate
+          </button>
+        </div>
+      </div>
+      <div class="pdf-viewer">
+        <div class="loader" id="loader"></div>
+        <iframe id="pdfFrame"></iframe>
+        <button class="fullscreen-btn" id="fullscreenBtn">
+          <i class="fas fa-expand"></i> Fullscreen
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Download Options Modal -->
+  <div class="download-options" id="downloadOptions">
+    <div class="download-modal">
+      <button class="close-modal" id="closeModal">
+        <i class="fas fa-times"></i>
+      </button>
+      <h3>Download Options</h3>
+      <div class="download-option" id="directDownload">
+        <i class="fas fa-download"></i>
+        <div>
+          <div class="option-title">Direct Download</div>
+          <div class="option-desc">Save the file directly to your device</div>
+        </div>
+      </div>
+      <div class="download-option" id="openWithDrive">
+        <i class="fab fa-google-drive"></i>
+        <div>
+          <div class="option-title">Open with Google Drive</div>
+          <div class="option-desc">View and manage the file in your Drive</div>
+        </div>
+      </div>
+      <div class="download-option" id="emailFile">
+        <i class="fas fa-envelope"></i>
+        <div>
+          <div class="option-title">Email this file</div>
+          <div class="option-desc">Send to your email address</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ---------------- SYLLABUS LINKS ----------------
+    const SYLLABUS = {
+      CSE: {
+        S1: "https://drive.google.com/file/d/1Nb0yUnR1QJDojz213bbi3_MgE8_-1N8J/view",
+        S2: "https://drive.google.com/file/d/1tocsbnxMU8hddkxZi6KahdKm86vPlefD/view",
+        S3: "https://drive.google.com/file/d/1iVXuGzxJlLtl9wNy-dkV6zz5s6-6rR62/view",
+        S4: "https://drive.google.com/file/d/1YrzUt9I62gfW2DHFw_qZss3z9FlWCvDZ/view",
+        S5: "https://drive.google.com/file/d/1NkQ70EvWc_P4PgkHkXd0Hehh90znWlZ8/view",
+        S6: "https://drive.google.com/file/d/1yEjojrEBcFiPa5JUJNdBF_cdGgswDZz1/view",
+        S7: "https://drive.google.com/file/d/1qU_orhLnaQu4lRhSBtm46Je_0EwP6BTX/view",
+        S8: "https://drive.google.com/file/d/11fbCYmHcdmHwwEGUpLRJOqPG2RegzuSZ/view"
+      },
+      ECE: {
+        S1: "https://drive.google.com/file/d/1NWNMUOS5kMI_JSEiLXC3B6Dhb3w__Mg3/view",
+        S2: "https://drive.google.com/file/d/1IrE3mvqpMiLgCkaCNs_aQu_KNKft42ST/view",
+        S3: "https://drive.google.com/file/d/1ETj_qpFWRmleDM9ETG1NBDZHuKzDKASn/view",
+        S4: "https://drive.google.com/file/d/1SmfU5abso1HpZWRi2zMc6vk2x-D9JURs/view",
+        S5: "https://drive.google.com/file/d/1OC_u2J1KWY5q9f4WBo6NHgnYdAcym4Q5/view",
+        S6: "https://drive.google.com/file/d/13gyKbb8y9EgBY1CWmVotzxfw6mWpAWHH/view",
+        S7: "https://drive.google.com/file/d/1YbRqBOw-QkI7d0Yi0tPOyYHlNqUCJVfQ/view",
+        S8: "https://drive.google.com/file/d/1Qs5mieo8nlDH9SaNO36-V5DavT1Ob9KG/view"
+      },
+      EEE: {
+        S1: "https://drive.google.com/file/d/1ups94DlADXRILWb1Dtj0FzVTv3UKgDnW/view",
+        S2: "https://drive.google.com/file/d/1b_bX8qXRsgaq8FIwFmV6YgMd20ge_XDE/view",
+        S3: "https://drive.google.com/file/d/1H0rr_sLwQBIwvhPIYYN3rKQt7nCPHoCk/view",
+        S4: "https://drive.google.com/file/d/10R0ldMsj9g49MixaIs1CG9oVQo2_GUtf/view",
+        S5: "https://drive.google.com/file/d/1HnuwB7i8GaZwAmlyqUa-D6lpQDrdaeqx/view",
+        S6: "https://drive.google.com/file/d/13HhTgo1ssdBo0GgZZBWKZfO1xdxnD0qj/view",
+        S7: "https://drive.google.com/file/d/1Kdc1Xbr0l28FdPzqCV8hRX2btVkcZ00n/view",
+        S8: "https://drive.google.com/file/d/1KFIPhcL8zUEKST2na4COrUzWjV8VkHWp/view"
+      },
+      AEI: {
+        S1: "https://drive.google.com/file/d/1Es4jy59O3_AcXcAIaX6ly7qAp5cNmmoU/view",
+        S2: "https://drive.google.com/file/d/1GUP51RCmBnTF1ySf6aSI28iZ-W3Y66K4/view",
+        S3: "https://drive.google.com/file/d/1qIDCPMwVbHe7W914IHJwYZdk3M8Hos1h/view",
+        S4: "https://drive.google.com/file/d/1LuXUkNKp0sP5-BxeK_It7N0tn6RsRPvx/view",
+        S5: "https://drive.google.com/file/d/1N1xg7qB2lqJtiph1e6F8xd0qoutS8Ftw/view",
+        S6: "https://drive.google.com/file/d/1hMOvRamLu8Lvi0p235KyPw6LKkUXgZ8e/view",
+        S7: "https://drive.google.com/file/d/1rdAc3RuKTATzlsnSYUKJAA8vTP_NeLNs/view",
+        S8: "https://drive.google.com/file/d/1pAKIDFLHaJm9qoHOehpXwh3j15bnuiWr/view"
+      },
+      EL: {
+        S1: "https://drive.google.com/file/d/1gKPSNyoAHXb6Ine-BP44-zb7aULnuNQu/view",
+        S2: "https://drive.google.com/file/d/1pB8fXsmPJi6arfuoAbcDfNi9ItpZ9nTy/view",
+        S3: "https://drive.google.com/file/d/1aR7QeSLON3Jr0LmajF4jJkWth_UkVvJP/view",
+        S4: "https://drive.google.com/file/d/1BngvMzzoC5dVT3sx-vwTjWCSBiRfHMs7/view",
+        S5: "https://drive.google.com/file/d/1SM-7yGnwR7R-Oosbi9bjhIohJCxkYfWN/view",
+        S6: "https://drive.google.com/file/d/1BBsCAtHb5CB9jOPrrdIvpBMnkwMZ_DlP/view",
+        S7: "https://drive.google.com/file/d/1acmJW6nXTUIM2QM4BAZUQu0nCbkD_hja/view",
+        S8: "https://drive.google.com/file/d/1i7J9xajJDaOuQTh9IGzvTSr3XSvUeUWi/view"
+      },
+      CE: {
+        S1: "https://drive.google.com/file/d/1OMsYDIsGlcO6opmI326DYzMfQW8yCmAJ/view",
+        S2: "https://drive.google.com/file/d/1RlbT7QziI_5XD0nDG0whJP7u_5IeQhNE/view",
+        S3: "https://drive.google.com/file/d/18IM8v-7QNsU8i6SrmoUDXdHwfMi7jysu/view",
+        S4: "https://drive.google.com/file/d/14TlHeYfV-8hFDDpi9JwCIm_NPU3fOZxQ/view",
+        S5: "https://drive.google.com/file/d/1vTdrJxig2YzG5FCSqdw6e0UP0D3duuqD/view",
+        S6: "https://drive.google.com/file/d/1zjHmaprfiSXp5qPsRhl3ITMRT56_VKl5/view",
+        S7: "https://drive.google.com/file/d/1JB9us65_uI_26orTwTpZ4Vpn0sb_Sq1l/view",
+        S8: "https://drive.google.com/file/d/1KDMme7nYclMkjygA4l3I08qr8r4aDp8R/view"
+      },
+      IE: {
+        S1: "https://drive.google.com/file/d/10NnTBipcPsYulYSar43t4KbgVe8DQwTB/view",
+        S2: "https://drive.google.com/file/d/1N1SeLN_i0yDoPFhNOERO6sS4sPTFSZpR/view",
+        S3: "https://drive.google.com/file/d/1zbRt4TW4Je8tn0q9EAAzEHkG-CYjr1-p/view",
+        S4: "https://drive.google.com/file/d/1rG0JaQh1a_KApCn7e3gJ-V-NiUhsCUzO/view",
+        S5: "https://drive.google.com/file/d/1WMSGeY9nV13vJXBVCd4yeb_Vexir7JBf/view",
+        S6: "https://drive.google.com/file/d/1f5i0NPXiToA0_52Bi9piRPU-NSumdiPZ/view",
+        S7: "https://drive.google.com/file/d/1cNxzxXpY3KjYBLwtGcIkobZj7QMIDjjb/view",
+        S8: "https://drive.google.com/file/d/1NUn6rynWvOqiElDgturlTwbvu7Sl_f2q/view"
+      },
+      ME: {
+        S1: "https://drive.google.com/file/d/1IiuCo-WFPw2iBj7YjpD1gJVlmfyq6iMX/view",
+        S2: "https://drive.google.com/file/d/12zWIwzolA5RTmBRUqenJNamDFpDtW5C_/view",
+        S3: "https://drive.google.com/file/d/1QlEXtOfg-Y0BMAAibQNZVEwn0lY3M8aG/view",
+        S4: "https://drive.google.com/file/d/1dM5f2ZrAW1nJ6NFECekBdIDkXhuVufN7/view",
+        S5: "https://drive.google.com/file/d/1zNVelrCrvGzXus7WqhtK6gy_QK7BIvn8/view",
+        S6: "https://drive.google.com/file/d/1QCYSWcy1w4qoUszhZX1dzYeq1d0s61up/view",
+        S7: "https://drive.google.com/file/d/1sKB71h2xo4wMd-xHLX9jK4cZbHhVxKoE/view",
+        S8: "https://drive.google.com/file/d/10WSp7NrEbInwhOsOLmU8SyqGESSq3CCr/view"
+      }
+    };
+
+    // ---------------- CURRICULUM LINKS ----------------
+    const CURRICULUM = {
+      CSE: "https://drive.google.com/file/d/1Cv12oEMqxfpHu0snYPhn87RCHlehApd6/view",
+      ECE: "https://drive.google.com/file/d/1s27nV28OoN6fsPYn6fiiJHarPjPVCfwz/view",
+      EEE: "https://drive.google.com/file/d/1kol_PxvnX6WrGfX1RhT7c83uxCbYyGfY/view",
+      AEI: "https://drive.google.com/file/d/1OslXJSUiHcMQveE_cvsYVpRkoWo0R6V5/view",
+      EL: "https://drive.google.com/file/d/1fTMAsUArKeEy6H-WxJzUrkwuhPNDQSkK/view",
+      CE: "https://drive.google.com/file/d/1ckRhTjPJJDlcEp3RwRLojLUdOYql39dm/view",
+      IE: "https://drive.google.com/file/d/1PRN-lQtKOpY9s8F9b9-l8JoNWiZLdkdJ/view",
+      ME: "https://drive.google.com/file/d/1ABaNVog0aww2okY1kYwspd0wX9di3L2R/view"
+    };
+
+    // UI Elements
+    const syllabusTab = document.getElementById("syllabusTab"),
+          curriculumTab = document.getElementById("curriculumTab"),
+          syllabusControls = document.getElementById("syllabusControls"),
+          curriculumControls = document.getElementById("curriculumControls"),
+          deptSelect = document.getElementById("deptSelect"),
+          semSelect = document.getElementById("semSelect"),
+          currDeptSelect = document.getElementById("currDeptSelect"),
+          actions = document.getElementById("actions"),
+          viewBtn = document.getElementById("viewBtn"),
+          downloadBtn = document.getElementById("downloadBtn"),
+          pdfContainer = document.getElementById("pdfContainer"),
+          pdfFrame = document.getElementById("pdfFrame"),
+          loader = document.getElementById("loader"),
+          pdfTitle = document.getElementById("pdfTitle"),
+          zoomInBtn = document.getElementById("zoomInBtn"),
+          zoomOutBtn = document.getElementById("zoomOutBtn"),
+          rotateBtn = document.getElementById("rotateBtn"),
+          fullscreenBtn = document.getElementById("fullscreenBtn"),
+          downloadOptions = document.getElementById("downloadOptions"),
+          closeModal = document.getElementById("closeModal"),
+          directDownload = document.getElementById("directDownload"),
+          openWithDrive = document.getElementById("openWithDrive"),
+          emailFile = document.getElementById("emailFile");
+
+    let currentLink = "";
+    let currentDept = "";
+    let currentSem = "";
+    let rotation = 0;
+    let zoomLevel = 1;
+
+    // Switch tabs
+    syllabusTab.onclick = () => {
+      syllabusTab.classList.add("active");
+      curriculumTab.classList.remove("active");
+      syllabusControls.style.display = "flex";
+      curriculumControls.style.display = "none";
+      actions.classList.remove("show");
+      pdfContainer.classList.remove("show");
+    };
+    
+    curriculumTab.onclick = () => {
+      curriculumTab.classList.add("active");
+      syllabusTab.classList.remove("active");
+      curriculumControls.style.display = "flex";
+      syllabusControls.style.display = "none";
+      actions.classList.remove("show");
+      pdfContainer.classList.remove("show");
+    };
+
+    // Dropdown change handlers
+    function updateSyllabus() {
+      currentDept = deptSelect.value;
+      currentSem = semSelect.value;
+      
+      if (currentDept && currentSem) {
+        currentLink = SYLLABUS[currentDept][currentSem];
+        actions.classList.add("show");
+        pdfTitle.textContent = `${currentDept} Semester ${currentSem.slice(1)} Syllabus`;
+      }
+    }
+    
+    deptSelect.onchange = updateSyllabus;
+    semSelect.onchange = updateSyllabus;
+
+    currDeptSelect.onchange = () => {
+      currentDept = currDeptSelect.value;
+      
+      if (currentDept) {
+        currentLink = CURRICULUM[currentDept];
+        actions.classList.add("show");
+        pdfTitle.textContent = `${currentDept} Curriculum`;
+      }
+    };
+
+    // View PDF
+    viewBtn.onclick = () => {
+      if (!currentLink) return;
+      
+      let fileId = currentLink.split("/d/")[1].split("/")[0];
+      let embed = `https://drive.google.com/file/d/${fileId}/preview`;
+      
+      loader.style.display = "flex";
+      pdfFrame.src = embed;
+      
+      pdfFrame.onload = () => {
+        loader.style.display = "none";
+      };
+      
+      pdfContainer.classList.add("show");
+      
+      // Reset zoom and rotation
+      rotation = 0;
+      zoomLevel = 1;
+      updatePdfView();
+    };
+
+    // Download options
+    downloadBtn.onclick = () => {
+      if (!currentLink) return;
+      downloadOptions.classList.add("show");
+    };
+
+    closeModal.onclick = () => {
+      downloadOptions.classList.remove("show");
+    };
+
+    // Direct download
+    directDownload.onclick = () => {
+      if (!currentLink) return;
+      
+      let fileId = currentLink.split("/d/")[1].split("/")[0];
+      let dl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+      
+      // Create a temporary link to trigger download
+      const link = document.createElement('a');
+      link.href = dl;
+      link.setAttribute('download', '');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      downloadOptions.classList.remove("show");
+    };
+
+    // Open with Google Drive
+    openWithDrive.onclick = () => {
+      if (!currentLink) return;
+      window.open(currentLink, "_blank");
+      downloadOptions.classList.remove("show");
+    };
+
+    // Email file
+    emailFile.onclick = () => {
+      if (!currentLink) return;
+      
+      let fileId = currentLink.split("/d/")[1].split("/")[0];
+      let subject, body;
+      
+      if (currDeptSelect.value) {
+        // Curriculum
+        subject = `${currentDept} Curriculum - KTU 2024`;
+        body = `Here is the link to the ${currentDept} Curriculum: ${currentLink}`;
+      } else {
+        // Syllabus
+        subject = `${currentDept} Semester ${currentSem.slice(1)} Syllabus - KTU 2024`;
+        body = `Here is the link to the ${currentDept} Semester ${currentSem.slice(1)} Syllabus: ${currentLink}`;
+      }
+      
+      window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      downloadOptions.classList.remove("show");
+    };
+
+    // PDF controls
+    function updatePdfView() {
+      pdfFrame.style.transform = `rotate(${rotation}deg) scale(${zoomLevel})`;
+    }
+
+    zoomInBtn.onclick = () => {
+      zoomLevel += 0.1;
+      updatePdfView();
+    };
+
+    zoomOutBtn.onclick = () => {
+      if (zoomLevel > 0.2) zoomLevel -= 0.1;
+      updatePdfView();
+    };
+
+    rotateBtn.onclick = () => {
+      rotation += 90;
+      updatePdfView();
+    };
+
+    fullscreenBtn.onclick = () => {
+      if (!document.fullscreenElement) {
+        pdfContainer.requestFullscreen().catch(err => {
+          console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+        fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i> Exit Fullscreen';
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+          fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> Fullscreen';
+        }
+      }
+    };
+
+    // Close modal when clicking outside
+    window.onclick = (event) => {
+      if (event.target == downloadOptions) {
+        downloadOptions.classList.remove("show");
+      }
+    };
+  </script>
+<!-- Home Button -->
+<style>
+    .home-button-bottom {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        animation: pulse 2s infinite;
+    }
+    
+    .home-button-bottom:hover {
+        background: var(--secondary);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    .home-button-bottom i {
+        font-size: 24px;
+    }
+    
+    .home-button-bottom .text {
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+        transition: width 0.3s ease;
+    }
+    
+    .home-button-bottom:hover .text {
+        width: 120px;
+    }
+    
+    @media (max-width: 768px) {
+        .home-button-bottom {
+            bottom: 20px;
+            left: 20px;
+            padding: 12px 15px;
+        }
+        
+        .home-button-bottom:hover .text {
+            width: 0;
+        }
+    }
+</style>
+
+<button class="home-button-bottom" onclick="goToHome()">
+    <i class="fas fa-home"></i>
+    <span class="text">Back to Home</span>
+</button>
+
+<script>
+    function goToHome() {
+        // Redirect to index.html
+        window.location.href = "index.html";
+    }
+</script>
+<!-- WhatsApp Button -->
+<style>
+    .whatsapp-button-round {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #25D366;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 28px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+    }
+    
+    .whatsapp-button-round:hover {
+        background: #128C7E;
+        transform: scale(1.1);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    .whatsapp-tooltip {
+        position: absolute;
+        bottom: 70px;
+        right: 0;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+    
+    .whatsapp-button-round:hover .whatsapp-tooltip {
+        opacity: 1;
+    }
+    
+    @media (max-width: 768px) {
+        .whatsapp-button-round {
+            bottom: 20px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            font-size: 24px;
+        }
+    }
+</style>
+
+<a href="https://chat.whatsapp.com/InqKAyjS0W38WHNqyZdyyK?mode=ems_qr_t" target="_blank" class="whatsapp-button-round">
+    <i class="fab fa-whatsapp"></i>
+    <div class="whatsapp-tooltip">Join our WhatsApp Group</div>
+</a>
+</body>
+</html>
